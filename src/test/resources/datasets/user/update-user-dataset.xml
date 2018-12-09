@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<role id="1" name="ADMIN" />
+	<role id="2" name="USER" />
+
+	<user id="1" login="adminLogin"
+		password="$2a$10$4CPYaLutcgdl6/ayVI7Ge.tkOIJrJwJW1L.XvTlinehut4a5Ss.Fu"
+		email="admin@ukr.net" firstName="Ivan" lastName="Ivanov"
+		birthday="2001-01-01" role_id="1" />
+
+	<user id="2" login="userLogin"
+		password="$2a$10$wM9PFLlfl3Jf5hUPpvRuBOHpCDVPJ5FDfAuUU2DCBiXWNa.7JWBhS"
+		email="user@gmail.com" firstName="Pavel" lastName="Pavlov"
+		birthday="1992-02-02" role_id="1" />
+
+	<carrier id="1" title="someTitle1" />
+	<carrier id="2" title="someTitle2" />
+</dataset>
+    

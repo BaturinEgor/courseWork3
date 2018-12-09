@@ -1,0 +1,26 @@
+body {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #eee;
+}
+
+a {
+	color: blue;
+	cursor: pointer;
+}
+
+table {
+	width: 100%;
+}
+
+table, td, th {
+	border: 1px solid black;
+	border-collapse: collapse;
+	text-align: center;
+	height: 50px;
+	padding: 15px;
+}
+
+div.a {
+	text-align: center;
+}

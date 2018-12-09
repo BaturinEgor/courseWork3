@@ -1,0 +1,12 @@
+com\nixsolutions\controller\admin\UpdateControllerTest.class
+com\nixsolutions\controller\user\UserControllerTest.class
+com\nixsolutions\Integration\CarrierDaoTest.class
+com\nixsolutions\controller\admin\CreateControllerTest.class
+com\nixsolutions\controller\IndexControllerTest.class
+com\nixsolutions\controller\HomeControllerTest.class
+com\nixsolutions\Integration\RoleDaoTest.class
+com\nixsolutions\controller\admin\AdminControllerTest.class
+com\nixsolutions\controller\admin\DeleteControllerTest.class
+com\nixsolutions\controller\RegistrationControllerTest.class
+com\nixsolutions\Integration\UserDaoTest.class
+com\nixsolutions\controller\LoginControllerTest.class

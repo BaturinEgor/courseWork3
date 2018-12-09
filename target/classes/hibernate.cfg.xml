@@ -1,0 +1,20 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+        "classpath://org/hibernate/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="dialect">org.hibernate.dialect.H2Dialect</property>
+		<property name="hbm2ddl.auto">update</property>
+		<property name="show_sql">true</property>
+		<mapping class="ua.khpi.baturin.entity.Role" />
+		<mapping class="ua.khpi.baturin.entity.User" />
+		<mapping class="ua.khpi.baturin.entity.Carrier" />
+		<mapping class="ua.khpi.baturin.entity.Bus" />
+		<mapping class="ua.khpi.baturin.entity.Station" />
+		<mapping class="ua.khpi.baturin.entity.Route" />
+		<mapping class="ua.khpi.baturin.entity.Driving" />
+		<mapping class="ua.khpi.baturin.entity.Status" />
+		<mapping class="ua.khpi.baturin.entity.Client" />
+		<mapping class="ua.khpi.baturin.entity.Ticket" />
+	</session-factory>
+</hibernate-configuration>
