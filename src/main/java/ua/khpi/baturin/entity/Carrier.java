@@ -1,12 +1,15 @@
 package ua.khpi.baturin.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +25,9 @@ public class Carrier implements Serializable {
 
     @Column(name = "title")
     private String title;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "carrier")
+    private List<Bus> busses;
 
     public Carrier() {
 
@@ -85,6 +91,11 @@ public class Carrier implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Carrier [id=" + id + ", title=" + title + "]";
     }
 
 }

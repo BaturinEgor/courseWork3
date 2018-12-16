@@ -14,4 +14,6 @@ public interface StationDao {
     List<Station> findAll();
 
     Station findByTitle(String title);
+
+    Station findById(Long id);
 }

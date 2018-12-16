@@ -1,6 +1,9 @@
 package ua.khpi.baturin.dao.contract;
 
+import java.util.List;
+
 import ua.khpi.baturin.entity.Client;
+import ua.khpi.baturin.entity.Route;
 import ua.khpi.baturin.entity.Ticket;
 
 public interface TicketDao {
@@ -10,5 +13,7 @@ public interface TicketDao {
 
     void remove(Ticket ticket);
 
-    Ticket findByClient(Client client);
+    List<Ticket> findByClient(Client client);
+
+    List<Ticket> findByRoute(Route route);
 }

@@ -93,4 +93,24 @@ public class HibernateRouteDaoImpl implements RouteDao {
         return session;
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public Route findById(Long id) {
+        if (id == null) {
+            throw new NullPointerException();
+        }
+        Route role = null;
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Route> query = builder.createQuery(Route.class);
+        Root<Route> root = query.from(Route.class);
+        query.select(root).where(builder.equal(root.get("id"), id));
+        Query<Route> q = session.createQuery(query);
+        List<Route> roles = q.getResultList();
+        if (roles.size() != 0) {
+            role = roles.get(0);
+        }
+        return role;
+    }
+
 }

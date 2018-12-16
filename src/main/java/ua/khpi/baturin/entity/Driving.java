@@ -1,7 +1,6 @@
 package ua.khpi.baturin.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -43,17 +42,23 @@ public class Driving implements Serializable {
     private Date arrivalDate;
 
     @Column(name = "price")
-    private BigDecimal price;
+    private Double price;
 
     @ManyToOne()
     private Route route;
+
+    private String routeNumber;
+
+    private Long uniqueRouteIdentifier;
+
+    private String create;
 
     public Driving() {
 
     }
 
     public Driving(Long id, Station departureStation, Time departureTime, Date departureDate, Station arrivalStation,
-            Time arrivalTime, Date arrivalDate, BigDecimal price, Route route) {
+            Time arrivalTime, Date arrivalDate, Double price, Route route) {
         super();
         this.id = id;
         this.departureStation = departureStation;
@@ -64,6 +69,30 @@ public class Driving implements Serializable {
         this.arrivalDate = arrivalDate;
         this.price = price;
         this.route = route;
+    }
+
+    public String getCreate() {
+        return create;
+    }
+
+    public void setCreate(String create) {
+        this.create = create;
+    }
+
+    public String getRouteNumber() {
+        return routeNumber;
+    }
+
+    public void setRouteNumber(String routeNumber) {
+        this.routeNumber = routeNumber;
+    }
+
+    public Long getUniqueRouteIdentifier() {
+        return uniqueRouteIdentifier;
+    }
+
+    public void setUniqueRouteIdentifier(Long uniqueRouteIdentifier) {
+        this.uniqueRouteIdentifier = uniqueRouteIdentifier;
     }
 
     public Long getId() {
@@ -122,11 +151,11 @@ public class Driving implements Serializable {
         this.arrivalDate = arrivalDate;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -228,7 +257,9 @@ public class Driving implements Serializable {
     public String toString() {
         return "Driving [id=" + id + ", departureStation=" + departureStation + ", departureTime=" + departureTime
                 + ", departureDate=" + departureDate + ", arrivalStation=" + arrivalStation + ", arrivalTime="
-                + arrivalTime + ", arrivalDate=" + arrivalDate + ", price=" + price + ", route=" + route + "]";
+                + arrivalTime + ", arrivalDate=" + arrivalDate + ", price=" + price + ", route=" + route
+                + ", routeNumber=" + routeNumber + ", uniqueRouteIdentifier=" + uniqueRouteIdentifier + ", create="
+                + create + "]";
     }
 
 }

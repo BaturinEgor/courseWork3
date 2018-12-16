@@ -12,6 +12,8 @@ public interface BusDao {
 
     void remove(Bus bus);
 
+    Bus findById(Long id);
+
     List<Bus> findAll();
 
     Bus findByNumber(String number);

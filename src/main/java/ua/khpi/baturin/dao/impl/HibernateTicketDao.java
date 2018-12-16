@@ -1,5 +1,7 @@
 package ua.khpi.baturin.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ua.khpi.baturin.dao.contract.TicketDao;
 import ua.khpi.baturin.entity.Client;
+import ua.khpi.baturin.entity.Route;
 import ua.khpi.baturin.entity.Ticket;
 
 @Repository("ticketDao")
@@ -49,7 +52,7 @@ public class HibernateTicketDao implements TicketDao {
 
     @Transactional
     @Override
-    public Ticket findByClient(Client client) {
+    public List<Ticket> findByClient(Client client) {
         if (client == null) {
             throw new NullPointerException();
         }
@@ -59,8 +62,23 @@ public class HibernateTicketDao implements TicketDao {
         Root<Ticket> root = query.from(Ticket.class);
         query.select(root).where(builder.equal(root.get("client"), client));
         Query<Ticket> q = session.createQuery(query);
-        Ticket driving = q.getSingleResult();
+        List<Ticket> driving = q.getResultList();
         return driving;
     }
 
+    @Transactional
+    @Override
+    public List<Ticket> findByRoute(Route route) {
+        if (route == null) {
+            throw new NullPointerException();
+        }
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Ticket> query = builder.createQuery(Ticket.class);
+        Root<Ticket> root = query.from(Ticket.class);
+        query.select(root).where(builder.equal(root.get("route"), route));
+        Query<Ticket> q = session.createQuery(query);
+        List<Ticket> driving = q.getResultList();
+        return driving;
+    }
 }

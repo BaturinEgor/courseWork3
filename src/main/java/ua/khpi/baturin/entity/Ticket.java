@@ -1,7 +1,6 @@
 package ua.khpi.baturin.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -43,20 +42,23 @@ public class Ticket implements Serializable {
     private Station arrivalStation;
 
     @Column(name = "price")
-    private BigDecimal price;
+    private Double price;
 
     @ManyToOne()
     private Route route;
 
     @ManyToOne()
-    private Client client;
+    private User user;
+
+    @Column(name = "seat")
+    private Integer seat;
 
     public Ticket() {
 
     }
 
     public Ticket(Long id, Time departureTime, Date departureDate, Station departureStation, Time arrivalTime,
-            Date arrivalDate, Station arrivalStation, BigDecimal price, Route route, Client client) {
+            Date arrivalDate, Station arrivalStation, Double price, Route route, User user) {
         super();
         this.id = id;
         this.departureTime = departureTime;
@@ -67,7 +69,23 @@ public class Ticket implements Serializable {
         this.arrivalStation = arrivalStation;
         this.price = price;
         this.route = route;
-        this.client = client;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Integer getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Integer seat) {
+        this.seat = seat;
     }
 
     public Long getId() {
@@ -126,11 +144,11 @@ public class Ticket implements Serializable {
         this.arrivalStation = arrivalStation;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -142,14 +160,6 @@ public class Ticket implements Serializable {
         this.route = route;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -157,7 +167,7 @@ public class Ticket implements Serializable {
         result = prime * result + ((arrivalDate == null) ? 0 : arrivalDate.hashCode());
         result = prime * result + ((arrivalStation == null) ? 0 : arrivalStation.hashCode());
         result = prime * result + ((arrivalTime == null) ? 0 : arrivalTime.hashCode());
-        result = prime * result + ((client == null) ? 0 : client.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
         result = prime * result + ((departureDate == null) ? 0 : departureDate.hashCode());
         result = prime * result + ((departureStation == null) ? 0 : departureStation.hashCode());
         result = prime * result + ((departureTime == null) ? 0 : departureTime.hashCode());
@@ -197,13 +207,6 @@ public class Ticket implements Serializable {
                 return false;
             }
         } else if (!arrivalTime.equals(other.arrivalTime)) {
-            return false;
-        }
-        if (client == null) {
-            if (other.client != null) {
-                return false;
-            }
-        } else if (!client.equals(other.client)) {
             return false;
         }
         if (departureDate == null) {
@@ -249,7 +252,7 @@ public class Ticket implements Serializable {
         return "Ticket [id=" + id + ", departureTime=" + departureTime + ", departureDate=" + departureDate
                 + ", departureStation=" + departureStation + ", arrivalTime=" + arrivalTime + ", arrivalDate="
                 + arrivalDate + ", arrivalStation=" + arrivalStation + ", price=" + price + ", route=" + route
-                + ", client=" + client + "]";
+                + ", client=" + user + "]";
     }
 
 }

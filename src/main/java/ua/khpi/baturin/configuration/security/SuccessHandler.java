@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.h2.engine.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -23,22 +24,18 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
     private UserService userService;
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request,
-            HttpServletResponse response, Authentication authentication)
-            throws IOException, ServletException {
-        Set<String> roles = AuthorityUtils
-                .authorityListToSet(authentication.getAuthorities());
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+            Authentication authentication) throws IOException, ServletException {
+        Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 
-        request.setAttribute("user",
-                userService.findByLogin(authentication.getName()));
+        request.setAttribute("user", userService.findByLogin(authentication.getName()));
+        request.getSession().setAttribute("user", userService.findByLogin(authentication.getName()));
 
         if (roles.contains("ADMIN")) {
-            RequestDispatcher dispatcher = request
-                    .getRequestDispatcher("/admin");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin");
             dispatcher.forward(request, response);
         } else {
-            RequestDispatcher dispatcher = request
-                    .getRequestDispatcher("/user");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/user");
             dispatcher.forward(request, response);
         }
     }

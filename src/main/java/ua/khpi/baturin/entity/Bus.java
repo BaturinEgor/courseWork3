@@ -1,13 +1,17 @@
 package ua.khpi.baturin.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +32,11 @@ public class Bus implements Serializable {
     private int seats;
 
     @ManyToOne()
+    @JoinColumn(name = "carrier_id")
     private Carrier carrier;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bus")
+    private List<Route> routes;
 
     public Bus() {
 
@@ -40,6 +48,14 @@ public class Bus implements Serializable {
         this.busNumber = busNumber;
         this.seats = seats;
         this.carrier = carrier;
+    }
+
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
     }
 
     public Long getId() {

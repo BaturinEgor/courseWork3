@@ -98,4 +98,20 @@ public class HibernateBusDaoImpl implements BusDao {
         return busses;
     }
 
+    @Transactional
+    @Override
+    public Bus findById(Long id) {
+        if (id == null) {
+            throw new NullPointerException();
+        }
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Bus> query = builder.createQuery(Bus.class);
+        Root<Bus> root = query.from(Bus.class);
+        query.select(root).where(builder.equal(root.get("id"), id));
+        Query<Bus> q = session.createQuery(query);
+        Bus carrier = q.getSingleResult();
+        return carrier;
+    }
+
 }

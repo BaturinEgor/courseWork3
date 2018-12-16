@@ -28,7 +28,7 @@ public class HibernateDrivingDao implements DrivingDao {
         if (driving == null) {
             throw new NullPointerException();
         }
-        sessionFactory.getCurrentSession().save(driving);
+        sessionFactory.getCurrentSession().saveOrUpdate(driving);
     }
 
     @Transactional

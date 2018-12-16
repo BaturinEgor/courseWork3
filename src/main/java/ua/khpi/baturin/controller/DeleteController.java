@@ -23,12 +23,10 @@ public class DeleteController {
         try {
             idUserToDelete = Long.parseLong(id);
         } catch (Exception e) {
-            return new ModelAndView("redirect:/admin", "message",
-                    "User to delete is not found");
+            return new ModelAndView("redirect:/admin", "message", "User to delete is not found");
         }
         User user = userService.findById(idUserToDelete);
         userService.remove(user);
-        return new ModelAndView("redirect:/admin", "message",
-                "User successfully deleted");
+        return new ModelAndView("redirect:/admin", "message", "User successfully deleted");
     }
 }

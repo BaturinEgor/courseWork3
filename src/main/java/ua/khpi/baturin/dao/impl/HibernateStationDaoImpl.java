@@ -92,4 +92,24 @@ public class HibernateStationDaoImpl implements StationDao {
         return session;
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public Station findById(Long id) {
+        if (id == null) {
+            throw new NullPointerException();
+        }
+        Station role = null;
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Station> query = builder.createQuery(Station.class);
+        Root<Station> root = query.from(Station.class);
+        query.select(root).where(builder.equal(root.get("id"), id));
+        Query<Station> q = session.createQuery(query);
+        List<Station> roles = q.getResultList();
+        if (roles.size() != 0) {
+            role = roles.get(0);
+        }
+        return role;
+    }
+
 }

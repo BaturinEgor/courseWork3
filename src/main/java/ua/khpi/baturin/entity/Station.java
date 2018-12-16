@@ -1,12 +1,15 @@
 package ua.khpi.baturin.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +26,15 @@ public class Station implements Serializable {
     @Column(name = "title")
     private String title;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "arrivalStation")
+    private List<Driving> drivings;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departureStation")
+    private List<Driving> drivings2;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "arrivalStation")
+    private List<Ticket> tickets;
+
     public Station() {
 
     }
@@ -31,6 +43,30 @@ public class Station implements Serializable {
         super();
         this.id = id;
         this.title = title;
+    }
+
+    public List<Driving> getDrivings2() {
+        return drivings2;
+    }
+
+    public void setDrivings2(List<Driving> drivings2) {
+        this.drivings2 = drivings2;
+    }
+
+    public List<Driving> getDrivings() {
+        return drivings;
+    }
+
+    public void setDrivings(List<Driving> drivings) {
+        this.drivings = drivings;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     public Long getId() {

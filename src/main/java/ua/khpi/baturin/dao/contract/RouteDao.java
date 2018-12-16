@@ -14,4 +14,6 @@ public interface RouteDao {
     List<Route> findAll();
 
     Route findByNumber(String number);
+
+    Route findById(Long id);
 }
