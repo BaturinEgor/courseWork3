@@ -11,7 +11,7 @@
 <body>
 	<div class="container">
 		<form:form id="cancelForm" method="get" action="admin" />
-		<form:form method="post" action="update" modelAttribute="user">
+		<form:form method="post" action="updateUser" modelAttribute="user">
 			<form:hidden path="id" />
 			<h2>Update user</h2>
 			<div class="container-block">

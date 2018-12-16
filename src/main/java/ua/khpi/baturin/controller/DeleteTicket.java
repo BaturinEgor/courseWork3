@@ -7,26 +7,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import ua.khpi.baturin.entity.User;
-import ua.khpi.baturin.service.contract.UserService;
+import ua.khpi.baturin.dao.contract.StationDao;
+import ua.khpi.baturin.dao.contract.TicketDao;
+import ua.khpi.baturin.entity.Station;
+import ua.khpi.baturin.entity.Ticket;
 
 @Controller
-@RequestMapping("/deleteUser")
-public class DeleteController {
+@RequestMapping("/deleteTicket")
+public class DeleteTicket {
 
     @Autowired
-    private UserService userService;
+    private TicketDao busDao;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView delete(@RequestParam(value = "id") String id) {
         Long idUserToDelete = null;
         try {
             idUserToDelete = Long.parseLong(id);
         } catch (Exception e) {
-            return new ModelAndView("redirect:/admin", "message", "пользователь не найден");
+            return new ModelAndView("redirect:/privateabinet", "message", "Error while ticket deleting");
         }
-        User user = userService.findById(idUserToDelete);
-        userService.remove(user);
-        return new ModelAndView("redirect:/admin", "message", "Пользователь успешно удалён");
+        Ticket user = busDao.findById(idUserToDelete);
+        busDao.remove(user);
+        return new ModelAndView("redirect:/privateCabinet", "message", "Билет успешно сдан");
     }
 }

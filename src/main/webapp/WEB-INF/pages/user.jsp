@@ -12,6 +12,7 @@
 <body>
 	<div class="container">
 		<form:form id="logout" method="get" action="logout" />
+		  <form:form id="privateCabinet" method="get" action="privateCabinet" />
 		<form:form id="findTicket" method="get" action="findTicket"
 			modelAttribute="driving">
 			<select class="custom-select" id="departureStation"
@@ -35,7 +36,7 @@
 		<button type="button" onclick="document.forms['findTicket'].submit()">Найти
 			билет</button>
 		<button type="button"
-			onclick="document.forms['busManagement'].submit()">Личный
+			onclick="document.forms['privateCabinet'].submit()">Личный
 			кабинет</button>
 		<button type="button" onclick="document.forms['logout'].submit()">Выйти</button>
 		<form:errors path="message" cssStyle="color: #f4426e;" />

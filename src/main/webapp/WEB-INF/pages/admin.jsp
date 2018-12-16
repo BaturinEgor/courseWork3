@@ -17,6 +17,7 @@
 		<form:form id="busManagement" method="get" action="busManagement" />
 		<form:form id="createStation" method="get" action="stationManagement" />
 		<form:form id="createRoute" method="get" action="routeManagement" />
+		<form:form id="createUser" method="get" action="usersManagement" />
 		<button type="button"
 			onclick="document.forms['carrierManagement'].submit()">Управление
 			перевозчиками</button>
@@ -28,6 +29,8 @@
 			станциями</button>
 		<button type="button" onclick="document.forms['createRoute'].submit()">Управление
 			маршрутами</button>
+		<button type="button" onclick="document.forms['createUser'].submit()">Управление
+			пользователями</button>
 		<button type="button" onclick="document.forms['logout'].submit()">Выйти</button>
 		<form:errors path="message" cssStyle="color: #f4426e;" />
 		<div class="error-message">

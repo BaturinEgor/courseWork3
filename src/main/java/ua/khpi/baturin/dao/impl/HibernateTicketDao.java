@@ -14,9 +14,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import ua.khpi.baturin.dao.contract.TicketDao;
-import ua.khpi.baturin.entity.Client;
 import ua.khpi.baturin.entity.Route;
+import ua.khpi.baturin.entity.Station;
 import ua.khpi.baturin.entity.Ticket;
+import ua.khpi.baturin.entity.User;
 
 @Repository("ticketDao")
 public class HibernateTicketDao implements TicketDao {
@@ -52,15 +53,15 @@ public class HibernateTicketDao implements TicketDao {
 
     @Transactional
     @Override
-    public List<Ticket> findByClient(Client client) {
-        if (client == null) {
+    public List<Ticket> findByClient(User user) {
+        if (user == null) {
             throw new NullPointerException();
         }
         Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Ticket> query = builder.createQuery(Ticket.class);
         Root<Ticket> root = query.from(Ticket.class);
-        query.select(root).where(builder.equal(root.get("client"), client));
+        query.select(root).where(builder.equal(root.get("user"), user));
         Query<Ticket> q = session.createQuery(query);
         List<Ticket> driving = q.getResultList();
         return driving;
@@ -80,5 +81,25 @@ public class HibernateTicketDao implements TicketDao {
         Query<Ticket> q = session.createQuery(query);
         List<Ticket> driving = q.getResultList();
         return driving;
+    }
+
+    @Transactional
+    @Override
+    public Ticket findById(Long id) {
+        if (id == null) {
+            throw new NullPointerException();
+        }
+        Ticket role = null;
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Ticket> query = builder.createQuery(Ticket.class);
+        Root<Ticket> root = query.from(Ticket.class);
+        query.select(root).where(builder.equal(root.get("id"), id));
+        Query<Ticket> q = session.createQuery(query);
+        List<Ticket> roles = q.getResultList();
+        if (roles.size() != 0) {
+            role = roles.get(0);
+        }
+        return role;
     }
 }

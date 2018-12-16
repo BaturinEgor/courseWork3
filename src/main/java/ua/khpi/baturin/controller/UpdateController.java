@@ -19,7 +19,7 @@ import ua.khpi.baturin.service.contract.RoleService;
 import ua.khpi.baturin.service.contract.UserService;
 
 @Controller
-@RequestMapping("/update")
+@RequestMapping("/updateUser")
 public class UpdateController {
 
     @Autowired

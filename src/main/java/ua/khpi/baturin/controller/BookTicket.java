@@ -57,7 +57,7 @@ public class BookTicket {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String updateProcess(@SessionAttribute("user") User user, @ModelAttribute("routeId") String routeId,
+    public ModelAndView updateProcess(@SessionAttribute("user") User user, @ModelAttribute("routeId") String routeId,
             @ModelAttribute("seat") String seat, BindingResult result, Model model) {
         Route route = routeDao.findById(Long.parseLong(routeId));
         List<Driving> drivings = drivingDao.findByRoute(route);
@@ -104,8 +104,11 @@ public class BookTicket {
 
         System.out.println(ticket);
 
+        ticketDao.create(ticket);
+
         System.out.println("route id " + routeId);
         System.out.println("seat " + seat);
-        return "redirect:/user";
+
+        return new ModelAndView("showTicket", "ticket", ticket);
     }
 }

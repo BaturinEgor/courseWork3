@@ -2,13 +2,16 @@ package ua.khpi.baturin.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -43,12 +46,15 @@ public class User implements Serializable {
     @ManyToOne()
     private Role role;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Ticket> tickets;
+
     public User() {
 
     }
 
-    public User(Long id, String login, String password, String email,
-            String firstName, String lastName, Date birthday, Role role) {
+    public User(Long id, String login, String password, String email, String firstName, String lastName, Date birthday,
+            Role role) {
         super();
         this.id = id;
         this.login = login;
@@ -58,6 +64,14 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.birthday = birthday;
         this.role = role;
+    }
+    
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     public void setId(Long id) {
@@ -130,10 +144,8 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", login=" + login + ", password=" + password
-                + ", email=" + email + ", firstName=" + firstName
-                + ", lastName=" + lastName + ", birthday=" + birthday
-                + ", roleId=" + role + "]";
+        return "User [id=" + id + ", login=" + login + ", password=" + password + ", email=" + email + ", firstName="
+                + firstName + ", lastName=" + lastName + ", birthday=" + birthday + ", roleId=" + role + "]";
     }
 
     @Override
