@@ -1,5 +1,7 @@
 package ua.khpi.baturin.controller;
 
+import java.util.regex.Pattern;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ua.khpi.baturin.dao.contract.CarrierDao;
 import ua.khpi.baturin.entity.Carrier;
+import ua.khpi.baturin.util.Validator;
 
 @Controller
 @RequestMapping("/createCarrier")
@@ -29,11 +32,14 @@ public class CreateCarrier {
 
     @RequestMapping(method = RequestMethod.POST)
     public String createInsert(@Valid @ModelAttribute("carrier") Carrier carrier, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "createCarrier";
+        if (carrier.getTitle() != null) {
+            if (!Validator.someCheck(carrier.getTitle())) {
+                model.addAttribute("message", "Неверное название перевозчика");
+                return "redirect:/carrierManagement";
+            }
         }
         carrierDao.create(carrier);
-        model.addAttribute("message", "Carrier successfully creaated");
+        model.addAttribute("message", "Перевозчик успешно создан");
         return "redirect:/carrierManagement";
     }
 }

@@ -12,11 +12,13 @@
 	<form:form id="toAdmin" method="get" action="admin" />
 	<c:out value="${message}" />
 	<p />
-	<a onclick="document.forms['toAdmin'].submit()">На главную</a>
+	<button onclick="document.forms['toAdmin'].submit()">На
+		главную</button>
+	<button onclick="document.forms['createForm'].submit()">Добавить
+		маршрут</button>
 	<my:routeTag routeForm="${routs}" />
 	<p />
 	<form:form id="createForm" method="get" action="createRoute" />
-	<a onclick="document.forms['createForm'].submit()">Добавить маршрут</a>
 	<script>
 		function deleteRoute(id) {
 			if (confirm("Вы действительно хотите удалить маршрут? Все связанные данные будут утеряны")) {

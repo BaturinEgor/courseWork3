@@ -9,15 +9,15 @@
 <title>Carrier</title>
 </head>
 <body>
-	<form:form id="toAdmin" method="get" action="admin" />
 	<c:out value="${message}" />
-	<p />
-	<a onclick="document.forms['toAdmin'].submit()">На главную</a>
+	<form:form id="toAdmin" method="get" action="admin" />
+	<button onclick="document.forms['toAdmin'].submit()">На
+		главную</button>
+	<button onclick="document.forms['createForm'].submit()">Добавить
+		перевозчика</button>
 	<my:carrierTag carriers="${carriers}" />
 	<p />
 	<form:form id="createForm" method="get" action="createCarrier" />
-	<a onclick="document.forms['createForm'].submit()">Добавить
-		перевозчика</a>
 
 
 	<script>

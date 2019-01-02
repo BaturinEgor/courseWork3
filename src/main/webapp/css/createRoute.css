@@ -1,0 +1,71 @@
+body {
+	padding-bottom: 40px;
+	background-color: #eee;
+}
+
+.custom-select {
+	position: relative;
+	width: 200px;
+	height: 40px;
+	margin: 8px 5px;
+}
+
+input[type=text], input[type=password] {
+	width: 200px;
+	padding: 12px 20px;
+	margin: 8px 5px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 12px 20px;
+	margin: 8px 5px;
+	border: none;
+	cursor: pointer;
+	width: 200px;
+}
+
+.custom-button {
+	color: white;
+	cursor: pointer;
+	width: 100%;
+	height: 40px;
+}
+
+form {
+	display: inline;
+}
+
+.header-container {
+	margin-left: auto;
+	margin-right: auto;
+	width: 200px;
+	text-align: center;
+}
+
+.route-container {
+	width: 200px;
+}
+
+.drivings-container {
+	margin-left: 50px;
+	padding: 12px 20px;
+}
+
+.drivings-container2 {
+    margin-left: 50px;
+    padding: 12px 20px;
+}
+
+.triple-container {
+	width: 33%;
+	display: inline-table;
+}
+
+.driving-container {
+	width: 200px;
+}

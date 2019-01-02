@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE taglib PUBLIC
+        "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+        "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+	<tlib-version>1.0.0</tlib-version>
+	<jsp-version>2.0</jsp-version>
+	<short-name>routesListTag</short-name>
+	<display-name>routesListTag</display-name>
+	<tag>
+		<name>routeTag2</name>
+		<tag-class>ua.khpi.baturin.util.RoutesList2</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>ticketToBuyForm</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.List</type>
+		</attribute>
+		<attribute>
+			<name>departureStation</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.String</type>
+		</attribute>
+		<attribute>
+			<name>arrivalStation</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.String</type>
+		</attribute>
+	</tag>
+</taglib>

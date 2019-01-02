@@ -1,0 +1,46 @@
+body {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #eee;
+}
+
+input[type=text], input[type=password] {
+	width: 200px;
+	padding: 12px 20px;
+	margin: 8px 0;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+form {
+	display: inline-block;
+}
+
+button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 12px 20px;
+	margin: 8px 0;
+	border: none;
+	display: inline-block;
+	cursor: pointer;
+	width: 200px;
+}
+
+.container {
+	margin: auto;
+	width: 405px;
+	padding: 10px;
+}
+
+.container-header {
+	text-align: center;
+	margin: auto;
+	width: 600px;
+	padding: 10px;
+	margin: auto;
+}
+
+.error-message {
+	color: #f4426e;
+}

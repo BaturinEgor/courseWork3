@@ -12,11 +12,13 @@
 	<form:form id="toAdmin" method="get" action="admin" />
 	<c:out value="${message}" />
 	<p />
-	<a onclick="document.forms['toAdmin'].submit()">На главную</a>
+	<button onclick="document.forms['toAdmin'].submit()">На
+		главную</button>
+	<button onclick="document.forms['createForm'].submit()">Добавить
+		автобус</button>
 	<my:busTag busses="${busses}" />
 	<p />
 	<form:form id="createForm" method="get" action="createBus" />
-	<a onclick="document.forms['createForm'].submit()">Добавить автобус</a>
 	<script>
 		function removeBus(id) {
 			if (confirm("Вы действительно хотите удалить автобус? Все связанные данные будут утеряны")) {

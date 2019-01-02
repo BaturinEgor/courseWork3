@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ConfirmPasswords {
-    String message() default "Passwords are not the same";
+    String message() default "Пароли не совпадают";
 
     Class<?>[] groups() default {};
 

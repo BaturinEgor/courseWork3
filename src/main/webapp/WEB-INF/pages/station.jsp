@@ -12,8 +12,10 @@
 	<form:form id="toAdmin" method="get" action="admin" />
 	<c:out value="${message}" />
 	<p />
-	<a onclick="document.forms['toAdmin'].submit()">На главную</a>
-	<a onclick="document.forms['createForm'].submit()">Добавить станцию</a>
+	<button onclick="document.forms['toAdmin'].submit()">На
+		главную</button>
+	<button onclick="document.forms['createForm'].submit()">Добавить
+		станцию</button>
 	<my:stationTag stations="${stations}" />
 	<p />
 	<form:form id="createForm" method="get" action="createStation" />

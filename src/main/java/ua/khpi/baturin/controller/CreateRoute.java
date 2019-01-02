@@ -51,11 +51,21 @@ public class CreateRoute {
             @ModelAttribute("selectedBus") String bus, @ModelAttribute("routeNumber") String routeNumber,
             BindingResult result, Model model) {
 
+        List<String> daysOfWeek = new ArrayList<>();
+        daysOfWeek.add("Понедельник");
+        daysOfWeek.add("Вторник");
+        daysOfWeek.add("Среда");
+        daysOfWeek.add("Четверг");
+        daysOfWeek.add("Пятница");
+        daysOfWeek.add("Суббота");
+        daysOfWeek.add("Воскресенье");
+
         if (bus != null && !bus.equals("")) {
             CreateRoute.bus = busDao.findByNumber(bus);
         }
 
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("days", daysOfWeek);
         modelAndView.addObject("drivings", drivings);
         modelAndView.addObject("stations", stationDao.findAll());
         modelAndView.addObject("driving", new Driving());
@@ -69,10 +79,15 @@ public class CreateRoute {
         Driving drivingToAdd = new Driving();
 
         try {
-            drivingToAdd.setArrivalDate(Date.valueOf(arrivalDate));
-            drivingToAdd.setDepartureDate(Date.valueOf(departureDate));
+            System.out.println(arrivalDate);
+            drivingToAdd.setArrivalDate(arrivalDate);
+            System.out.println(departureDate);
+            drivingToAdd.setDepartureDate(departureDate);
+            System.out.println(arrivalTime);
             drivingToAdd.setArrivalTime(Time.valueOf(arrivalTime));
+            System.out.println(departureTime);
             drivingToAdd.setDepartureTime(Time.valueOf(departureTime));
+            System.out.println(price);
             drivingToAdd.setPrice(Double.parseDouble(price));
         } catch (IllegalArgumentException e) {
             System.out.println("parse exception");

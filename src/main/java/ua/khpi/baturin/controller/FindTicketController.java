@@ -1,5 +1,7 @@
 package ua.khpi.baturin.controller;
 
+import java.sql.Date;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,7 @@ import ua.khpi.baturin.entity.Driving;
 import ua.khpi.baturin.entity.Route;
 import ua.khpi.baturin.entity.Station;
 import ua.khpi.baturin.entity.TicketToBuyForm;
+import ua.khpi.baturin.util.DateParser;
 
 @Controller
 @RequestMapping("/findTicket")
@@ -28,6 +31,9 @@ public class FindTicketController {
 
     public static Station arrivalStation;
     public static Station departureStation;
+
+    public static Date arrivalDate;
+    public static Date departureDate;
 
     @Autowired
     private BusDao busDao;
@@ -47,7 +53,14 @@ public class FindTicketController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView createInit(@ModelAttribute("departureStation") String departureStation,
             @ModelAttribute("arrivalStation") String arrivalStation, @ModelAttribute("driving") Driving driving,
-            BindingResult result, Model model) {
+            BindingResult result, Model model) throws ParseException {
+
+        try {
+            System.out.println("parsed day = " + DateParser.parse(driving.getDepartureDate()));
+        } catch (ParseException e) {
+            System.out.println("Exception thrown");
+        }
+
         System.out.println(departureStation);
         System.out.println(arrivalStation);
         System.out.println(driving);
@@ -61,23 +74,28 @@ public class FindTicketController {
             boolean haveDeparture = false;
             boolean haveArrival = false;
             boolean haveCorrectDate = false;
-            for (Driving driving2 : drivingDao.findByRoute(route)) {
-                if (driving2.getDepartureStation().getTitle().equals(departureStation)) {
-                    haveDeparture = true;
+
+            if (driving != null) {
+                for (Driving driving2 : drivingDao.findByRoute(route)) {
+                    if (driving2.getDepartureStation().getTitle().equals(departureStation)) {
+                        haveDeparture = true;
+                    }
+                    if (driving2.getArrivalStation().getTitle().equals(arrivalStation) && haveDeparture) {
+                        haveArrival = true;
+                    }
+                    System.out.println("1: " + DateParser.parse(driving.getDepartureDate()));
+                    System.out.println("2: " + driving2.getDepartureDate());
+                    if (DateParser.parse(driving.getDepartureDate()).equalsIgnoreCase(driving2.getDepartureDate())) {
+                        haveCorrectDate = true;
+                    }
                 }
-                if (driving2.getArrivalStation().getTitle().equals(arrivalStation) && haveDeparture) {
-                    haveArrival = true;
+                if (haveDeparture && haveArrival && haveCorrectDate) {
+                    TicketToBuyForm ttb = new TicketToBuyForm();
+                    ttb.setRoute(route);
+                    ttb.setAmountOfSeats(route.getBus().getSeats() - ticketDao.findByRoute(route).size());
+                    ttb.setDrivings(drivingDao.findByRoute(route));
+                    routes.add(ttb);
                 }
-                if (driving.getDepartureDate().equals(driving2.getDepartureDate())) {
-                    haveCorrectDate = true;
-                }
-            }
-            if (haveDeparture && haveArrival && haveCorrectDate) {
-                TicketToBuyForm ttb = new TicketToBuyForm();
-                ttb.setRoute(route);
-                ttb.setAmountOfSeats(route.getBus().getSeats() - ticketDao.findByRoute(route).size());
-                ttb.setDrivings(drivingDao.findByRoute(route));
-                routes.add(ttb);
             }
         }
 
@@ -88,6 +106,8 @@ public class FindTicketController {
         }
 
         ModelAndView modelAndView = new ModelAndView("routesList", "routes", routes);
+        modelAndView.addObject("departureStation", departureStation);
+        modelAndView.addObject("arrivalStation", arrivalStation);
         return modelAndView;
     }
 }

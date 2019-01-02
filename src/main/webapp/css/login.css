@@ -27,8 +27,9 @@ button {
 	margin: auto;
 	width: 200px;
 	padding: 10px;
+	text-align: center;
 }
 
 .error-message {
- color: #f4426e;
+	color: #f4426e;
 }

@@ -1,5 +1,8 @@
 package ua.khpi.baturin.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +38,16 @@ public class UpdateDrivingUpdate {
         System.out.println("dr to updt = " + drivingToUpdate);
         model.addAttribute("driving", drivingToUpdate);
         model.addAttribute("stations", stationDao.findAll());
+
+        List<String> days = new ArrayList<>();
+        days.add("Понедельник");
+        days.add("Вторник");
+        days.add("Среда");
+        days.add("Четверг");
+        days.add("Пятница");
+        days.add("Суббота");
+        days.add("Воскресенье");
+        model.addAttribute("days", days);
         return "updateDriving";
     }
 
@@ -57,7 +70,7 @@ public class UpdateDrivingUpdate {
             }
         }
 
-        model.addAttribute("message", "Driving successfuly updated");
+        model.addAttribute("message", "Переезд успешно изменен");
         return "redirect:/updateRoute";
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ua.khpi.baturin.dao.contract.CarrierDao;
 import ua.khpi.baturin.entity.Carrier;
+import ua.khpi.baturin.util.Validator;
 
 @Controller
 @RequestMapping("/updateCarrier")
@@ -29,6 +30,12 @@ public class UpdateCarrierController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String updateProcess(@ModelAttribute("carrier") Carrier carrier, BindingResult result, Model model) {
+        if (carrier.getTitle() != null) {
+            if (!Validator.someCheck(carrier.getTitle())) {
+                model.addAttribute("message", "Неверное название перевозчика");
+                return "redirect:/carrierManagement";
+            }
+        }
         System.out.println(carrier);
         carrierDao.update(carrier);
         model.addAttribute("message", "Carrier successfuly updated");

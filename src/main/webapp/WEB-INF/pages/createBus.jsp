@@ -4,12 +4,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="css/update.css" rel="stylesheet">
+<link href="css/createBus.css" rel="stylesheet">
 <title>Добавить автобус</title>
 </head>
 <body>
 	<div class="container">
-		<form:form id="cancelForm" method="get" action="admin" />
+		<form:form id="cancelForm" method="get" action="busManagement" />
 		<form:form method="post" action="createBus" modelAttribute="bus">
 			<h2>Добавить автобус</h2>
 			<div class="container-block">
@@ -21,6 +21,7 @@
 					required="required" />
 				<form:errors path="seats" cssStyle="color: #f4426e;" />
 			</div>
+			Перевозчик
 			<select class="custom-select" id="carrier" name="carrier">
 				<c:forEach items="${carriers}" var="carrier">
 					<option value=${carrier.title}>${carrier.title}</option>

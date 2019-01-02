@@ -4,10 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="css/update.css" rel="stylesheet">
+<link href="css/updateDriving.css" rel="stylesheet">
 <title>Изменить перегон</title>
 </head>
 <body>
+	<div class="header-container">
+		<h2>Изменить переезд</h2>
+	</div>
 	<div class="container">
 		<form:form id="cancelForm" method="get" action="updateRoute" />
 		<form:form id="updateDriving" method="post" action="updateDriving"
@@ -40,36 +43,30 @@
 					</c:choose>
 				</c:forEach>
 			</select>
-			<div class="container-block">
-				<form:input path="departureTime" type="text"
-					placeholder="Время отправления" required="required"
-					value="${driving.departureTime}" />
-				<form:errors path="departureTime" cssStyle="color: #f4426e;" />
-			</div>
-			<div class="container-block">
-				<form:input path="departureDate" type="text"
-					placeholder="Дата отправления" required="required"
-					value="${driving.departureDate}" />
-				<form:errors path="departureDate" cssStyle="color: #f4426e;" />
-			</div>
-			<div class="container-block">
-				<form:input path="arrivalTime" type="text"
-					placeholder="Время прибытия" required="required"
-					value="${driving.arrivalTime}" />
-				<form:errors path="arrivalTime" cssStyle="color: #f4426e;" />
-			</div>
-			<div class="container-block">
-				<form:input path="arrivalDate" type="text"
-					placeholder="Дата прибытия" required="required"
-					value="${driving.arrivalDate}" />
-				<form:errors path="arrivalDate" cssStyle="color: #f4426e;" />
-			</div>
-			<div class="container-block">
-				<form:input path="price" type="text" placeholder="Цена"
-					required="required" value="${driving.price}" />
-				<form:errors path="price" cssStyle="color: #f4426e;" />
-			</div>
+			<select class="custom-select" id="departureDate" name="departureDate">
+				<c:forEach items="${days}" var="day">
+					<option value=${day}>${day}</option>
+				</c:forEach>
+			</select>
+			</select>
+			<select class="custom-select" id="arrivalDate" name="arrivalDate">
+				<c:forEach items="${days}" var="day">
+					<option value="${day}">${day}</option>
+				</c:forEach>
+			</select>
+			<form:input path="departureTime" type="text"
+				placeholder="Время отправления" required="required"
+				value="${driving.departureTime}" />
+			<form:input path="arrivalTime" type="text"
+				placeholder="Время прибытия" required="required"
+				value="${driving.arrivalTime}" />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Цена:&nbsp; &nbsp;<form:input
+				path="price" type="text" placeholder="Цена" required="required"
+				value="${driving.price}" />
+			<form:errors path="price" cssStyle="color: #f4426e;" />
 		</form:form>
+	</div>
+	<div class="header-container">
 		<button type="button"
 			onclick="document.forms['updateDriving'].submit()">Изменить
 			перегон</button>

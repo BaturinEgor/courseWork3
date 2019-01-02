@@ -31,17 +31,11 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "firstName")
     private String firstName;
 
     @Column(name = "lastName")
     private String lastName;
-
-    @Column(name = "birthday")
-    private Date birthday;
 
     @ManyToOne()
     private Role role;
@@ -59,13 +53,11 @@ public class User implements Serializable {
         this.id = id;
         this.login = login;
         this.password = password;
-        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthday = birthday;
         this.role = role;
     }
-    
+
     public List<Ticket> getTickets() {
         return tickets;
     }
@@ -98,14 +90,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -122,30 +106,12 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public Date getBirthday() {
-        if (birthday != null) {
-            return (Date) birthday.clone();
-        } else {
-            return null;
-        }
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = (Date) birthday.clone();
-    }
-
     public Role getRole() {
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", login=" + login + ", password=" + password + ", email=" + email + ", firstName="
-                + firstName + ", lastName=" + lastName + ", birthday=" + birthday + ", roleId=" + role + "]";
     }
 
     @Override

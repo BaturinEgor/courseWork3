@@ -30,7 +30,7 @@ public class Driving implements Serializable {
     private Time departureTime;
 
     @Column(name = "departureDate")
-    private Date departureDate;
+    private String departureDate;
 
     @ManyToOne()
     private Station arrivalStation;
@@ -39,7 +39,7 @@ public class Driving implements Serializable {
     private Time arrivalTime;
 
     @Column(name = "arrivalDate")
-    private Date arrivalDate;
+    private String arrivalDate;
 
     @Column(name = "price")
     private Double price;
@@ -63,10 +63,8 @@ public class Driving implements Serializable {
         this.id = id;
         this.departureStation = departureStation;
         this.departureTime = departureTime;
-        this.departureDate = departureDate;
         this.arrivalStation = arrivalStation;
         this.arrivalTime = arrivalTime;
-        this.arrivalDate = arrivalDate;
         this.price = price;
         this.route = route;
     }
@@ -119,11 +117,11 @@ public class Driving implements Serializable {
         this.departureTime = departureTime;
     }
 
-    public Date getDepartureDate() {
+    public String getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(String departureDate) {
         this.departureDate = departureDate;
     }
 
@@ -143,11 +141,11 @@ public class Driving implements Serializable {
         this.arrivalTime = arrivalTime;
     }
 
-    public Date getArrivalDate() {
+    public String getArrivalDate() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(Date arrivalDate) {
+    public void setArrivalDate(String arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 

@@ -15,7 +15,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ConfirmLogin {
 
-    String message() default "User with given login is already exist";
+    String message() default "Пользователь с тким логином уже зарегистрирован";
 
     Class<?>[] groups() default {};
 

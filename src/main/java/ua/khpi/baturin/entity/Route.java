@@ -35,6 +35,9 @@ public class Route implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "route")
     private List<Driving> drivings;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route")
+    private List<Ticket> tickets;
+
     public Route() {
 
     }
@@ -44,6 +47,14 @@ public class Route implements Serializable {
         this.id = id;
         this.routeNumber = routeNumber;
         this.bus = bus;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     public List<Driving> getDrivings() {

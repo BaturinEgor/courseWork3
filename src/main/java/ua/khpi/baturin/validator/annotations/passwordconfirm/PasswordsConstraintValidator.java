@@ -20,7 +20,7 @@ public class PasswordsConstraintValidator
             return true;
         }
         ConstraintContextUtil.addConstraintToField("message",
-                "Passwords are not the same", constraintValidatorContext);
+                "Пароли не совпадают", constraintValidatorContext);
         return false;
     }
 }

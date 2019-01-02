@@ -16,6 +16,5 @@
 		<mapping class="ua.khpi.baturin.entity.Status" />
 		<mapping class="ua.khpi.baturin.entity.Client" />
 		<mapping class="ua.khpi.baturin.entity.Ticket" />
-		<mapping class="ua.khpi.baturin.entity.Admin" />
 	</session-factory>
 </hibernate-configuration>

@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "bus")
@@ -28,6 +30,7 @@ public class Bus implements Serializable {
     @Column(name = "bus_number")
     private String busNumber;
 
+    @Pattern(regexp = "[0-9]*", message = "пароль должен состоять только из латинских букв и иметь длинну 8-32 символов")
     @Column(name = "seats")
     private int seats;
 
@@ -122,7 +125,7 @@ public class Bus implements Serializable {
 
     @Override
     public String toString() {
-        return "Bus [id=" + id + ", busNumber=" + busNumber + ", seats=" + seats + ", carrier=" + carrier + "]";
+        return "Номер: " + busNumber + ", Мест: " + seats + ", Перевозчик: " + carrier.getTitle();
     }
 
 }

@@ -65,10 +65,9 @@ public class RouteTag implements Tag {
                 stringBuilder.append(rout.getRout().getBus().getBusNumber());
                 stringBuilder.append("</td>").append("<td>");
                 for (Driving driving : rout.getDrivings()) {
-                    stringBuilder.append(
-                            driving.getDepartureStation().getTitle() + " - " + driving.getArrivalStation().getTitle()
-                                    + "<p/>" + driving.getDepartureDate() + " - " + driving.getArrivalDate() + "<p/>"
-                                    + driving.getDepartureTime() + " - " + driving.getArrivalTime() + "<p/>" + "<p/>");
+                    stringBuilder.append(driving.getDepartureStation().getTitle() + " - "
+                            + driving.getArrivalStation().getTitle() + "<p/>" + driving.getDepartureTime() + " - "
+                            + driving.getArrivalTime() + "<p/>" + "<p/>");
                 }
                 stringBuilder.append("</td>").append("<td>");
                 stringBuilder.append(

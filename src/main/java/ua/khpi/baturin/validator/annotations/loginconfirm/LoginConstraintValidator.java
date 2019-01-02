@@ -38,7 +38,7 @@ public class LoginConstraintValidator
                 return true;
             } else {
                 ConstraintContextUtil.addConstraintToField("message",
-                        "User with given login is already exist",
+                        "Пользователь с тким логином уже зарегистрирован",
                         constraintValidatorContext);
                 return false;
             }

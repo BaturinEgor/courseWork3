@@ -17,8 +17,8 @@ import ua.khpi.baturin.entity.Driving;
 public class DeleteDriving {
 
     @RequestMapping(method = RequestMethod.POST)
-    public String delete(@ModelAttribute("uniqueRouteIdentifier") String uniqueRouteIdentifier, BindingResult result,
-            Model model) {
+    public String delete(@ModelAttribute("uniqueRouteIdentifier") String uniqueRouteIdentifier,
+            @ModelAttribute("bus") String bus, BindingResult result, Model model) {
         System.out.println("uniqueRouteIdentifier: " + uniqueRouteIdentifier);
         System.out.println("drivings before delete " + CreateRoute.drivings);
 
@@ -34,6 +34,7 @@ public class DeleteDriving {
             }
         }
         CreateRoute.drivings = localDrivings;
+        model.addAttribute("bus", bus);
         System.out.println(CreateRoute.drivings);
         return "redirect:/createRoute";
     }

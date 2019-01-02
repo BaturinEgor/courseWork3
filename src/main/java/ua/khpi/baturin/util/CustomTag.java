@@ -1,8 +1,6 @@
 package ua.khpi.baturin.util;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.jsp.JspException;
@@ -64,9 +62,8 @@ public class CustomTag implements Tag {
         JspWriter out = pageContext.getOut();
         if (users != null) {
             StringBuilder stringBuilder = new StringBuilder("<table>");
-            stringBuilder.append(
-                    "<tr><th>Login</th><th>First Name</th><th>Last Name</th><th>Age</th><th>Role</th>"
-                            + "<th>Actions</th></tr>");
+            stringBuilder
+                    .append("<tr><th>Логин</th><th>Имя</th><th>Фамилия</th<th>Роль</th>" + "<th>Actions</th></tr>");
             for (User user : users) {
                 stringBuilder.append("<tr>").append("<td>");
                 stringBuilder.append(user.getLogin());
@@ -75,15 +72,12 @@ public class CustomTag implements Tag {
                 stringBuilder.append("</td>").append("<td>");
                 stringBuilder.append(user.getLastName());
                 stringBuilder.append("</td>").append("<td>");
-                stringBuilder.append(getAge(user.getBirthday()));
                 stringBuilder.append("</td>").append("<td>");
                 stringBuilder.append(user.getRole().getName());
                 stringBuilder.append("</td>").append("<td>");
-                stringBuilder.append("<a id=\"remove\" onclick=\"removeUser("
-                        + user.getId() + ")\">delete</a>");
+                stringBuilder.append("<a id=\"remove\" onclick=\"removeUser(" + user.getId() + ")\">удалить</a>");
                 stringBuilder.append("<p/>");
-                stringBuilder.append("<a id=\"edt\" onclick=\"updateUser("
-                        + user.getId() + ")\">edit</a>");
+                stringBuilder.append("<a id=\"edt\" onclick=\"updateUser(" + user.getId() + ")\">изменить</a>");
                 stringBuilder.append("</td>").append("</tr>");
             }
             stringBuilder.append("</table>");
@@ -105,11 +99,5 @@ public class CustomTag implements Tag {
     public void release() {
         pageContext = null;
         parent = null;
-    }
-
-    private int getAge(Date birthday) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
-        return Integer.parseInt(formatter.format(System.currentTimeMillis()))
-                - Integer.parseInt(formatter.format(birthday));
     }
 }

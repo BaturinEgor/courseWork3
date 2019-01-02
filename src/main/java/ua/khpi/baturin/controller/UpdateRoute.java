@@ -1,6 +1,5 @@
 package ua.khpi.baturin.controller;
 
-import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +55,15 @@ public class UpdateRoute {
 
         System.out.println("dr some " + drivings);
 
+        List<String> days = new ArrayList<>();
+        days.add("Понедельник");
+        days.add("Вторник");
+        days.add("Среда");
+        days.add("Четверг");
+        days.add("Пятница");
+        days.add("Суббота");
+        days.add("Воскресенье");
+
         System.out.println(id);
         if (id != null && !id.equals("")) {
             Long routeToUpdateId = null;
@@ -83,6 +91,7 @@ public class UpdateRoute {
         System.out.println("route number = " + UpdateRoute.routeNumber);
         modelAndView.addObject("routeNumber", UpdateRoute.routeNumber);
         modelAndView.addObject("bus", UpdateRoute.bus.getBusNumber());
+        modelAndView.addObject("days", days);
 
         for (int i = 0; i < UpdateRoute.drivings.size(); i++) {
             UpdateRoute.drivings.get(i).setUniqueRouteIdentifier((long) i);
@@ -93,8 +102,8 @@ public class UpdateRoute {
         Driving drivingToAdd = new Driving();
 
         try {
-            drivingToAdd.setArrivalDate(Date.valueOf(arrivalDate));
-            drivingToAdd.setDepartureDate(Date.valueOf(departureDate));
+            drivingToAdd.setArrivalDate(arrivalDate);
+            drivingToAdd.setDepartureDate(departureDate);
             drivingToAdd.setArrivalTime(Time.valueOf(arrivalTime));
             drivingToAdd.setDepartureTime(Time.valueOf(departureTime));
             drivingToAdd.setPrice((Double.parseDouble(price)));

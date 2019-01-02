@@ -47,10 +47,8 @@ public class UserDaoTest {
         user.setId(3l);
         user.setLogin("userLogin2");
         user.setPassword("$2a$10$wM9PFLlfl3Jf5hUPpvRuBOHpCDVPJ5FDfAuUU2DCBiXWNa.7JWBhS");
-        user.setEmail("user2@ukr.net");
         user.setFirstName("Pavel");
         user.setLastName("Pavlov");
-        user.setBirthday(Date.valueOf("2003-03-03"));
         user.setRole(new Role(2l, "USER"));
         userDao.create(user);
     }
@@ -60,41 +58,9 @@ public class UserDaoTest {
         userDao.create(null);
     }
 
-    @Test
-    @DatabaseSetup({ "classpath:datasets/user/user-init-dataset.xml" })
-    @ExpectedDatabase("classpath:datasets/user/update-user-dataset.xml")
-    public void testShouldBeEqualAfterUpdate() throws Exception {
-        User user = new User();
-        user.setId(2l);
-        user.setLogin("userLogin");
-        user.setPassword("$2a$10$wM9PFLlfl3Jf5hUPpvRuBOHpCDVPJ5FDfAuUU2DCBiXWNa.7JWBhS");
-        user.setEmail("user@gmail.com");
-        user.setFirstName("Pavel");
-        user.setLastName("Pavlov");
-        user.setBirthday(Date.valueOf("1992-02-02"));
-        user.setRole(new Role(1l, "ADMIN"));
-        userDao.update(user);
-    }
-
     @Test(expected = NullPointerException.class)
     public void testUpdateNullShouldThrowNPE() {
         userDao.update(null);
-    }
-
-    @Test
-    @DatabaseSetup({ "classpath:datasets/user/user-init-dataset.xml" })
-    @ExpectedDatabase("classpath:datasets/user/remove-user-dataset.xml")
-    public void testShouldBeEqualAfterRemove() throws Exception {
-        User user = new User();
-        user.setId(2l);
-        user.setLogin("userLogin");
-        user.setPassword("$2a$10$wM9PFLlfl3Jf5hUPpvRuBOHpCDVPJ5FDfAuUU2DCBiXWNa.7JWBhS");
-        user.setEmail("user@ukr.net");
-        user.setFirstName("Petr");
-        user.setLastName("Petrov");
-        user.setBirthday(Date.valueOf("2002-02-02"));
-        user.setRole(new Role(2l, "USER"));
-        userDao.remove(user);
     }
 
     @Test(expected = NullPointerException.class)

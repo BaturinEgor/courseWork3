@@ -13,6 +13,7 @@ import ua.khpi.baturin.dao.contract.BusDao;
 import ua.khpi.baturin.dao.contract.CarrierDao;
 import ua.khpi.baturin.entity.Bus;
 import ua.khpi.baturin.entity.Carrier;
+import ua.khpi.baturin.util.Validator;
 
 @Controller
 @RequestMapping("/createBus")
@@ -36,10 +37,13 @@ public class CreateBus {
     @RequestMapping(method = RequestMethod.POST)
     public String createInsert(@ModelAttribute("bus") Bus bus, BindingResult result, Model model,
             @ModelAttribute("carrier") String carrier) {
-        System.out.println(bus);
-        System.out.println(carrier);
+        if (bus.getBusNumber() != null) {
+            if (!Validator.busNumberCheck(bus.getBusNumber())) {
+                model.addAttribute("message", "Неверный номер автобуа");
+                return "redirect:/busManagement";
+            }
+        }
         bus.setCarrier(carrierDao.findByTitle(carrier));
-        System.out.println(bus);
         busDao.create(bus);
         model.addAttribute("message", "Bus successfully created");
         return "redirect:/busManagement";

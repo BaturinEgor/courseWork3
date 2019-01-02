@@ -1,7 +1,5 @@
 package ua.khpi.baturin.dto;
 
-import java.sql.Date;
-
 import ua.khpi.baturin.entity.Role;
 import ua.khpi.baturin.entity.User;
 
@@ -14,10 +12,8 @@ public class Converter {
         user.setId(userDto.getId());
         user.setLogin(userDto.getLogin());
         user.setPassword(userDto.getPassword());
-        user.setEmail(userDto.getEmail());
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
-        user.setBirthday(Date.valueOf(userDto.getBirthday()));
         if (userDto.getRole().equals("ADMIN")) {
             roleID = 1L;
         } else {
@@ -34,10 +30,8 @@ public class Converter {
         userDto.setLogin(user.getLogin());
         userDto.setPassword(user.getPassword());
         userDto.setConfirmPassword(user.getPassword());
-        userDto.setEmail(user.getEmail());
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
-        userDto.setBirthday(user.getBirthday().toString());
         userDto.setRole(user.getRole().getName());
         return userDto;
     }

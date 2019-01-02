@@ -4,47 +4,37 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import ua.khpi.baturin.validator.annotations.dateconfirm.ConfirmDate;
 import ua.khpi.baturin.validator.annotations.loginconfirm.ConfirmLogin;
 import ua.khpi.baturin.validator.annotations.passwordconfirm.ConfirmPasswords;
 
-@ConfirmDate
 @ConfirmPasswords
 @ConfirmLogin
 public class UserDto {
 
     private Long id;
 
-    @NotNull(message = "Login required")
-    @Pattern(regexp = "^[A-Za-z0-9_]{8,32}$", message = "Login length must be between 8 and 32 symbols and contain only letters of the Latin alphabet")
+    @NotNull(message = "Логин не может быть пустым")
+    @Pattern(regexp = "^[A-Za-z0-9_]{8,32}$", message = "логин должен состоять только из латинских букв и иметь длинну 8-32 символов")
     private String login;
 
-    @NotNull(message = "Password required")
-    @Pattern(regexp = "^[a-zA-Z0-9]{8,32}$", message = "Password length must be between 8 and 32 symbols and contain only digits and Latin letters")
+    @NotNull(message = "Пароль не должен быть пустым")
+    @Pattern(regexp = "^[a-zA-Z0-9]{8,32}$", message = "пароль должен состоять только из латинских букв и иметь длинну 8-32 символов")
     private String password;
 
-    @NotNull(message = "Confirm password")
-    @Pattern(regexp = "^[a-zA-Z0-9]{8,32}$", message = "Password length must be between 8 and 32 symbols and contain only digits and Latin letters")
+    @NotNull(message = "Подтвердите пароль")
+    @Pattern(regexp = "^[a-zA-Z0-9]{8,32}$", message = "пароль должен состоять только из латинских букв и иметь длинну 8-32 символов")
     private String confirmPassword;
 
-    @NotNull(message = "Email required")
-    @org.hibernate.validator.constraints.Email
-    private String email;
-
-    @NotNull(message = "First name required")
+    @NotNull(message = "Укажите своё имя")
     @Size(min = 1, max = 100)
-    @Pattern(regexp = "^[a-zA-Zа-яА-Я]+", message = "Invalid first name")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я]+", message = "Не верно введено имя")
     private String firstName;
 
-    @NotNull(message = "Last name required")
+    @NotNull(message = "Укажите свою фамилию")
     @Size(min = 1, max = 100)
-    @Pattern(regexp = "^[a-zA-Zа-яА-Я]+", message = "Invalid last name")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я]+", message = "Не верно введена фамилия")
     private String lastName;
 
-    @NotNull(message = "Birthday must match pattern yyyy-mm-dd")
-    private String birthday;
-
-    @NotNull(message = "Choose role")
     private String role;
 
     private String message;
@@ -66,10 +56,8 @@ public class UserDto {
         this.login = login;
         this.password = password;
         this.confirmPassword = confirmPassword;
-        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthday = birthday;
         this.role = role;
         this.message = message;
     }
@@ -106,14 +94,6 @@ public class UserDto {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -128,14 +108,6 @@ public class UserDto {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
     }
 
     public String getRole() {
@@ -158,11 +130,8 @@ public class UserDto {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
         result = prime * result + ((confirmPassword == null) ? 0 : confirmPassword.hashCode());
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
         result = prime * result + ((login == null) ? 0 : login.hashCode());
         result = prime * result + ((message == null) ? 0 : message.hashCode());
@@ -183,13 +152,6 @@ public class UserDto {
             return false;
         }
         UserDto other = (UserDto) obj;
-        if (birthday == null) {
-            if (other.birthday != null) {
-                return false;
-            }
-        } else if (!birthday.equals(other.birthday)) {
-            return false;
-        }
         if (confirmPassword == null) {
             if (other.confirmPassword != null) {
                 return false;
@@ -197,25 +159,11 @@ public class UserDto {
         } else if (!confirmPassword.equals(other.confirmPassword)) {
             return false;
         }
-        if (email == null) {
-            if (other.email != null) {
-                return false;
-            }
-        } else if (!email.equals(other.email)) {
-            return false;
-        }
         if (firstName == null) {
             if (other.firstName != null) {
                 return false;
             }
         } else if (!firstName.equals(other.firstName)) {
-            return false;
-        }
-        if (id == null) {
-            if (other.id != null) {
-                return false;
-            }
-        } else if (!id.equals(other.id)) {
             return false;
         }
         if (lastName == null) {

@@ -11,9 +11,6 @@
 	<form:form id="logoutForm" method="get" action="admin" />
 	<h2>${message}</h2>
 	<a onclick="document.forms['logoutForm'].submit()">Logout</a>
-	<center>
-		<h2>Welcome ${user.getFirstName()}</h2>
-	</center>
 	<my:customTag users="${users}" roles="${roles}" />
 	<p />
 	<form:form id="createForm" method="get" action="create" />

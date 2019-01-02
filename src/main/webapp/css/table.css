@@ -9,6 +9,16 @@ a {
 	cursor: pointer;
 }
 
+button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 12px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+}
+
+
 table {
 	width: 100%;
 }
@@ -17,8 +27,6 @@ table, td, th {
 	border: 1px solid black;
 	border-collapse: collapse;
 	text-align: center;
-	height: 50px;
-	padding: 15px;
 }
 
 div.a {

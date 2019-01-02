@@ -65,12 +65,12 @@ public class BookTicket {
 
         for (Driving driving : drivings) {
             if (driving.getArrivalStation().equals(FindTicketController.arrivalStation)) {
-                ticket.setArrivalDate(driving.getArrivalDate());
+                ticket.setArrivalDate(FindTicketController.arrivalDate);
                 ticket.setArrivalTime(driving.getArrivalTime());
                 ticket.setArrivalStation(driving.getArrivalStation());
             }
             if (driving.getDepartureStation().equals(FindTicketController.departureStation)) {
-                ticket.setDepartureDate(driving.getDepartureDate());
+                ticket.setDepartureDate(FindTicketController.departureDate);
                 ticket.setDepartureTime(driving.getDepartureTime());
                 ticket.setDepartureStation(driving.getDepartureStation());
             }
