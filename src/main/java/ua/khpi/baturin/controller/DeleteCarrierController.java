@@ -27,6 +27,6 @@ public class DeleteCarrierController {
         }
         Carrier user = carrierDao.findById(idUserToDelete);
         carrierDao.remove(user);
-        return new ModelAndView("redirect:/carrierManagement", "message", "Carrier successfuly deleted");
+        return new ModelAndView("redirect:/carrierManagement", "message", "Перевозчик успешно удалёнЫ");
     }
 }

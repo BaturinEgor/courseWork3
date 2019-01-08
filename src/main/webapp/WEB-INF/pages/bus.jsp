@@ -16,10 +16,33 @@
 		главную</button>
 	<button onclick="document.forms['createForm'].submit()">Добавить
 		автобус</button>
+	<form action="busManagement" method="get">
+		<input id="title" name="title" placeholder="Перевозчик" type="text"></input>Фильтр
+		по перевозчику<input type="submit" value="Фильтровать">
+	</form>
+	<form action="busManagement" method="get">
+		<input placeholder="Номер автобуса" id="" name="number" type="text"></input>Фильтр
+		по номеру автобуса<input type="submit" value="Фильтровать">
+	</form>
 	<my:busTag busses="${busses}" />
 	<p />
 	<form:form id="createForm" method="get" action="createBus" />
 	<script>
+		function change(number) {
+			if (confirm(number)) {
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("action", "deleteBus");
+				document.body.appendChild(form);
+				var idField = document.createElement("input");
+				idField.setAttribute("type", "hidden");
+				idField.setAttribute("name", "id");
+				idField.setAttribute("value", id);
+				form.appendChild(idField);
+				form.submit();
+			}
+		}
+
 		function removeBus(id) {
 			if (confirm("Вы действительно хотите удалить автобус? Все связанные данные будут утеряны")) {
 				var form = document.createElement("form");

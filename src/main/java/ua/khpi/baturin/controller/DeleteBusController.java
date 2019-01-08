@@ -23,10 +23,10 @@ public class DeleteBusController {
         try {
             idUserToDelete = Long.parseLong(id);
         } catch (Exception e) {
-            return new ModelAndView("redirect:/busManagement", "message", "Error while bus deleting");
+            return new ModelAndView("redirect:/busManagement", "message", "Ошибка при удалении автобуса!");
         }
         Bus user = busDao.findById(idUserToDelete);
         busDao.remove(user);
-        return new ModelAndView("redirect:/busManagement", "message", "Bus successfuly deleted");
+        return new ModelAndView("redirect:/busManagement", "message", "Автобус успешно удалён");
     }
 }

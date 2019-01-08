@@ -12,17 +12,20 @@
 		<form:form id="cancelForm" method="get" action="busManagement" />
 		<form:form method="post" action="updateBus" modelAttribute="bus">
 			<h2>Изменить автобус</h2>
+			Номер автобуса:
 			<form:hidden path="id" required="required" value="${bus.id}" />
 			<div class="container-block">
 				<form:input path="busNumber" type="text"
 					placeholder="номер автобуса" required="required"
 					value="${bus.busNumber}" />
 			</div>
+			Количество мест:
 			<div class="container-block">
 				<form:input path="seats" type="text" placeholder="Количество мест"
 					required="required" value="${bus.seats}" />
 				<form:errors path="seats" cssStyle="color: #f4426e;" />
 			</div>
+			Перевозчик:
 			<select class="custom-select" id="carrier" name="carrier">
 				<c:forEach items="${carriers}" var="carrier">
 					<c:choose>

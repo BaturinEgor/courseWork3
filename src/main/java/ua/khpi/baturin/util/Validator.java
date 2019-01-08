@@ -38,4 +38,9 @@ public class Validator {
         Pattern pattern = Pattern.compile("^[0-9A-ZА-Я]+");
         return (name != null) && pattern.matcher(name).matches();
     }
+    
+    public static boolean stationTitleCheck(String name) {
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9а-яА-Я\\s]+");
+        return (name != null) && pattern.matcher(name).matches();
+    }
 }

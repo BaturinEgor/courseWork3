@@ -19,33 +19,39 @@ import ua.khpi.baturin.util.Validator;
 @RequestMapping("/createBus")
 public class CreateBus {
 
-    @Autowired
-    private BusDao busDao;
+	@Autowired
+	private BusDao busDao;
 
-    @Autowired
-    private CarrierDao carrierDao;
+	@Autowired
+	private CarrierDao carrierDao;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView createInit(Model model) {
-        model.addAttribute("carriers", carrierDao.findAll());
-        Bus bus = new Bus();
-        Carrier carrier = new Carrier();
-        model.addAttribute("carrier", carrier);
-        return new ModelAndView("createBus", "bus", bus);
-    }
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView createInit(Model model) {
+		model.addAttribute("carriers", carrierDao.findAll());
+		Bus bus = new Bus();
+		Carrier carrier = new Carrier();
+		model.addAttribute("carrier", carrier);
+		return new ModelAndView("createBus", "bus", bus);
+	}
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String createInsert(@ModelAttribute("bus") Bus bus, BindingResult result, Model model,
-            @ModelAttribute("carrier") String carrier) {
-        if (bus.getBusNumber() != null) {
-            if (!Validator.busNumberCheck(bus.getBusNumber())) {
-                model.addAttribute("message", "Неверный номер автобуа");
-                return "redirect:/busManagement";
-            }
-        }
-        bus.setCarrier(carrierDao.findByTitle(carrier));
-        busDao.create(bus);
-        model.addAttribute("message", "Bus successfully created");
-        return "redirect:/busManagement";
-    }
+	@RequestMapping(method = RequestMethod.POST)
+	public String createInsert(@ModelAttribute("bus") Bus bus, BindingResult result, Model model,
+			@ModelAttribute("carrier") String carrier) {
+		System.out.println("bus>>>>> " + bus);
+		if (bus.getBusNumber() != null) {
+			if (!Validator.busNumberCheck(bus.getBusNumber())) {
+				model.addAttribute("message", "Неверный номер автобуа");
+				return "redirect:/busManagement";
+			}
+			if (bus.getSeats() <= 0) {
+				model.addAttribute("message", "Ошибка при вводе количества мест");
+				return "redirect:/busManagement";
+			}
+		}
+		bus.setCarrier(carrierDao.findByTitle(carrier));
+		System.out.println("bus>>>>> " + bus);
+		busDao.create(bus);
+		model.addAttribute("message", "Автобус успешно добавлен");
+		return "redirect:/busManagement";
+	}
 }

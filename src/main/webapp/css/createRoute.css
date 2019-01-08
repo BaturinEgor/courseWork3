@@ -54,11 +54,12 @@ form {
 .drivings-container {
 	margin-left: 50px;
 	padding: 12px 20px;
+	width: 200px
 }
 
 .drivings-container2 {
-    margin-left: 50px;
-    padding: 12px 20px;
+	margin-left: 50px;
+	padding: 12px 20px;
 }
 
 .triple-container {
@@ -66,6 +67,18 @@ form {
 	display: inline-table;
 }
 
+.time-container {
+	width: 200px;
+}
+
+.time-global-container {
+	width: 400px;
+}
+
 .driving-container {
 	width: 200px;
+}
+
+.error-message {
+	color: #f4426e;
 }

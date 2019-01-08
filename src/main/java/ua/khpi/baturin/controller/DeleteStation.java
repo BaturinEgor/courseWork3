@@ -23,10 +23,10 @@ public class DeleteStation {
         try {
             idUserToDelete = Long.parseLong(id);
         } catch (Exception e) {
-            return new ModelAndView("redirect:/stationManagement", "message", "Error while station deleting");
+            return new ModelAndView("redirect:/stationManagement", "message", "Ошибка при удалении станции");
         }
         Station user = busDao.findById(idUserToDelete);
         busDao.remove(user);
-        return new ModelAndView("redirect:/stationManagement", "message", "Station successfuly deleted");
+        return new ModelAndView("redirect:/stationManagement", "message", "Станция успешно удалена");
     }
 }

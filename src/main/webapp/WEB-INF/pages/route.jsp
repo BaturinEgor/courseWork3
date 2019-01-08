@@ -10,7 +10,9 @@
 </head>
 <body>
 	<form:form id="toAdmin" method="get" action="admin" />
-	<c:out value="${message}" />
+	<div class="error-message">
+		<c:out value="${message}" />
+	</div>
 	<p />
 	<button onclick="document.forms['toAdmin'].submit()">На
 		главную</button>

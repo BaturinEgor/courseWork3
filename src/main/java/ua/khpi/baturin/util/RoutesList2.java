@@ -16,116 +16,126 @@ import ua.khpi.baturin.entity.TicketToBuyForm;
 @Service
 public class RoutesList2 implements Tag {
 
-    private List<TicketToBuyForm> ticketToBuyForm;
-    private String departureStation;
-    private String arrivalStation;
-    private PageContext pageContext;
-    private Tag parent;
+	private List<TicketToBuyForm> ticketToBuyForm;
+	private String departureStation;
+	private String arrivalStation;
+	private String date;
+	private PageContext pageContext;
+	private Tag parent;
 
-    public RoutesList2() {
+	public RoutesList2() {
 
-    }
+	}
 
-    public String getDepartureStation() {
-        return departureStation;
-    }
+	public String getDate() {
+		return date;
+	}
 
-    public void setDepartureStation(String departureStation) {
-        this.departureStation = departureStation;
-    }
+	public void setDate(String date) {
+		this.date = date;
+	}
 
-    public String getArrivalStation() {
-        return arrivalStation;
-    }
+	public String getDepartureStation() {
+		return departureStation;
+	}
 
-    public void setArrivalStation(String arrivalStation) {
-        this.arrivalStation = arrivalStation;
-    }
+	public void setDepartureStation(String departureStation) {
+		this.departureStation = departureStation;
+	}
 
-    public List<TicketToBuyForm> getTicketToBuyForm() {
-        return ticketToBuyForm;
-    }
+	public String getArrivalStation() {
+		return arrivalStation;
+	}
 
-    public void setTicketToBuyForm(List<TicketToBuyForm> ticketToBuyForm) {
-        this.ticketToBuyForm = ticketToBuyForm;
-    }
+	public void setArrivalStation(String arrivalStation) {
+		this.arrivalStation = arrivalStation;
+	}
 
-    public PageContext getPageContext() {
-        return pageContext;
-    }
+	public List<TicketToBuyForm> getTicketToBuyForm() {
+		return ticketToBuyForm;
+	}
 
-    public void setRouteForm(List<TicketToBuyForm> routeForm) {
-        this.ticketToBuyForm = routeForm;
-    }
+	public void setTicketToBuyForm(List<TicketToBuyForm> ticketToBuyForm) {
+		this.ticketToBuyForm = ticketToBuyForm;
+	}
 
-    @Override
-    public void setPageContext(PageContext pageContext) {
-        this.pageContext = pageContext;
-    }
+	public PageContext getPageContext() {
+		return pageContext;
+	}
 
-    @Override
-    public void setParent(Tag tag) {
-        this.parent = tag;
-    }
+	public void setRouteForm(List<TicketToBuyForm> routeForm) {
+		this.ticketToBuyForm = routeForm;
+	}
 
-    @Override
-    public Tag getParent() {
-        return this.parent;
-    }
+	@Override
+	public void setPageContext(PageContext pageContext) {
+		this.pageContext = pageContext;
+	}
 
-    @Override
-    public int doStartTag() throws JspException {
-        JspWriter out = pageContext.getOut();
-        if (ticketToBuyForm != null) {
-            StringBuilder stringBuilder = new StringBuilder("<table>");
-            stringBuilder.append(
-                    "<tr><th>Номер мршрута</th><th>Номер автобуса</th><th>Маршрут</th><th>Свободных мест</th><th>Действия</th></tr>");
-            for (TicketToBuyForm rout : ticketToBuyForm) {
-                stringBuilder.append("<tr>").append("<td>");
-                stringBuilder.append(rout.getRoute().getRouteNumber());
-                stringBuilder.append("</td>").append("<td>");
-                stringBuilder.append(rout.getRoute().getBus().getBusNumber());
-                stringBuilder.append("</td>").append("<td>");
-                boolean start = false;
-                boolean finish = false;
-                for (Driving driving : rout.getDrivings()) {
-                    if (driving.getDepartureStation().getTitle().equals(departureStation)) {
-                        start = true;
-                    }
-                    if (start && !finish) {
-                        stringBuilder.append(driving.getDepartureStation().getTitle() + " - "
-                                + driving.getArrivalStation().getTitle() + "<p/>" + driving.getDepartureTime() + " - "
-                                + driving.getArrivalTime() + "<p/>" + "<p/>");
-                    }
-                    if (driving.getArrivalStation().getTitle().equals(arrivalStation)) {
-                        finish = true;
-                    }
-                }
-                stringBuilder.append("</td>").append("<td>");
-                stringBuilder.append(rout.getAmountOfSeats());
-                stringBuilder.append("</td>").append("<td>");
-                stringBuilder.append(
-                        "<a id=\"remove\" onclick=\"bookTicket(" + rout.getRoute().getId() + ")\">купить билет</a>");
-            }
-            stringBuilder.append("</table>");
-            try {
-                out.print(stringBuilder.toString());
-            } catch (IOException e) {
-                throw new JspException("Error while custom tag processing", e);
-            }
-        }
-        return Tag.SKIP_BODY;
-    }
+	@Override
+	public void setParent(Tag tag) {
+		this.parent = tag;
+	}
 
-    @Override
-    public int doEndTag() throws JspException {
-        return Tag.EVAL_PAGE;
-    }
+	@Override
+	public Tag getParent() {
+		return this.parent;
+	}
 
-    @Override
-    public void release() {
-        pageContext = null;
-        parent = null;
-    }
+	@Override
+	public int doStartTag() throws JspException {
+		JspWriter out = pageContext.getOut();
+		if (ticketToBuyForm != null) {
+			StringBuilder stringBuilder = new StringBuilder("<table>");
+			stringBuilder.append(
+					"<tr><th>Номер мршрута</th><th>Номер автобуса</th><th>Маршрут</th><th>Свободных мест</th><th>Действия</th></tr>");
+			for (TicketToBuyForm rout : ticketToBuyForm) {
+				stringBuilder.append("<tr>").append("<td>");
+				stringBuilder.append(rout.getRoute().getRouteNumber());
+				stringBuilder.append("</td>").append("<td>");
+				stringBuilder.append(rout.getRoute().getBus().getBusNumber());
+				stringBuilder.append("</td>").append("<td>");
+				boolean start = false;
+				boolean finish = false;
+				for (Driving driving : rout.getDrivings()) {
+					if (driving.getDepartureStation().getTitle().equals(departureStation)) {
+						start = true;
+					}
+					if (start && !finish) {
+						stringBuilder.append(driving.getDepartureStation().getTitle() + " - "
+								+ driving.getArrivalStation().getTitle() + "<p/>" + driving.getDepartureTime() + " - "
+								+ driving.getArrivalTime() + "<p/>" + "________________________________" + "<p/>");
+					}
+					if (driving.getArrivalStation().getTitle().equals(arrivalStation)) {
+						finish = true;
+					}
+				}
+				stringBuilder.append("</td>").append("<td>");
+				stringBuilder.append(rout.getAmountOfSeats());
+				stringBuilder.append("</td>").append("<td>");
+				System.out.println("date in rout = " + this.getDate());
+				stringBuilder.append("<a id=\"remove\" onclick=\"bookTicket(" + rout.getRoute().getId() + ", " + "'"
+						+ this.getDate() + "'" + ")\">купить билет</a>");
+			}
+			stringBuilder.append("</table>");
+			try {
+				out.print(stringBuilder.toString());
+			} catch (IOException e) {
+				throw new JspException("Error while custom tag processing", e);
+			}
+		}
+		return Tag.SKIP_BODY;
+	}
+
+	@Override
+	public int doEndTag() throws JspException {
+		return Tag.EVAL_PAGE;
+	}
+
+	@Override
+	public void release() {
+		pageContext = null;
+		parent = null;
+	}
 
 }

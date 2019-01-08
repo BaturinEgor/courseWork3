@@ -10,12 +10,21 @@
 </head>
 <body>
 	<form:form id="toAdmin" method="get" action="admin" />
-	<c:out value="${message}" />
+	<div class="error-message">
+		<c:out value="${message}" />
+	</div>
 	<p />
 	<button onclick="document.forms['toAdmin'].submit()">На
 		главную</button>
 	<button onclick="document.forms['createForm'].submit()">Добавить
 		станцию</button>
+		
+	<form action="stationManagement" method="get">
+		Поиск по названию станции <input id="title" name="title"
+			placeholder="Название станции" type="text">
+			</input> <input
+			type="submit" value="поиск">
+	</form>
 	<my:stationTag stations="${stations}" />
 	<p />
 	<form:form id="createForm" method="get" action="createStation" />

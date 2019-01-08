@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <link href="css/chooseSeat.css" rel="stylesheet">
-<title>Забронировать билет</title>:
+<title>Забронировать билет</title>
 </head>
 <body>
 	<form:form id="cancelForm" method="get" action="user" />
@@ -18,6 +18,7 @@
 		<h2>Выберите место</h2>
 		<div class="cantainer-flex">
 			<c:forEach items="${seats}" var="seat">
+			 <%-- <c:if test="${fn:contains(seats2, 'seat')}}"> --%>
 				<c:if test="${count % 4 == 0}">
 					<c:if test="${flag == 'true'}">
 						<c:set var="flag" value="false" scope="page" />

@@ -12,16 +12,18 @@
 		<form:form id="cancelForm" method="get" action="busManagement" />
 		<form:form method="post" action="createBus" modelAttribute="bus">
 			<h2>Добавить автобус</h2>
+			Номер автобуса:
 			<div class="container-block">
 				<form:input path="busNumber" type="text"
-					placeholder="номер автобуса" required="required" />
+					placeholder="например: 192А5" required="required" />
 			</div>
+			Количество мест:
 			<div class="container-block">
 				<form:input path="seats" type="text" placeholder="Количество мест"
 					required="required" />
 				<form:errors path="seats" cssStyle="color: #f4426e;" />
 			</div>
-			Перевозчик
+			Перевозчик:
 			<select class="custom-select" id="carrier" name="carrier">
 				<c:forEach items="${carriers}" var="carrier">
 					<option value=${carrier.title}>${carrier.title}</option>

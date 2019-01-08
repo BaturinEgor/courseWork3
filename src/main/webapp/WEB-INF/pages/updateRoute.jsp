@@ -5,15 +5,18 @@
 <html lang="en">
 <head>
 <link href="css/createRoute.css" rel="stylesheet">
-<title>Изменить маршрут</title>:
+<title>Изменить маршрут</title>
 </head>
 <body>
+	<div class="error-message">
+		<c:out value="${message}" />
+	</div>
 	<div class="header-container">
 		<h2>Изменить маршрут</h2>
 	</div>
 	<div class="triple-container">
 		<div class="route-container">
-			<p>&nbsp;Автобус</p>
+			Автобус:
 			<form:form id="updateRoute2" method="post" action="updateRoute"
 				modelAttribute="driving">
 				<select class="custom-select" id="selectedBus" name="selectedBus">
@@ -28,9 +31,10 @@
 						</c:choose>
 					</c:forEach>
 				</select>
+				Номер маршрута:
 				<div class="container-block">
 					<form:input id="routeNumber" path="routeNumber" type="text"
-						placeholder="Номер маршрута" required="required"
+						placeholder="например 192А5" required="required"
 						value="${routeNumber}" />
 					<form:errors path="routeNumber" cssStyle="color: #f4426e;" />
 				</div>
@@ -72,14 +76,12 @@
 				</c:forEach>
 			</select>
 			<form:input path="departureTime" type="text"
-				placeholder="Время отправления" required="required" />
+				placeholder="например 13:30:00" required="true" />
 			<form:input path="arrivalTime" type="text"
-				placeholder="Время прибытия" required="required" />
+				placeholder="например 09:30:00" required="true" />
 			<form:input path="price" type="text" placeholder="Цена"
 				required="required" />
-			<button type="button"
-				onclick="document.forms['updateRoute'].submit()">Добавить
-				переезд</button>
+			<button type="submit">Добавить переезд</button>
 		</form:form>
 	</div>
 	<div class="triple-container">
@@ -92,13 +94,13 @@
 				<form:form method="post" action="deleteDrivingUpdate">
 					<input id="uniqueRouteIdentifier" name="uniqueRouteIdentifier"
 						type="hidden" value="${driving1.uniqueRouteIdentifier}" />
-					<textarea readonly rows="4" cols="26" name="text">${driving1.departureStation.title} -  ${driving1.arrivalStation.title}&#013;&#010;${driving1.departureDate} - ${driving1.arrivalDate}&#013;&#010;${driving1.departureTime} - ${driving1.arrivalTime}&#013;&#010;${driving1.price}</textarea>
-					<button type="submit">Удалить перегон</button>
+					<textarea readonly rows="4" cols="35" name="text">${driving1.departureStation.title} -  ${driving1.arrivalStation.title}&#013;&#010;${driving1.departureDate} - ${driving1.arrivalDate}&#013;&#010;${driving1.departureTime} - ${driving1.arrivalTime}&#013;&#010;${driving1.price}</textarea>
+					<button type="submit">Удалить переезд</button>
 				</form:form>
 				<form:form method="get" action="updateDriving">
 					<input id="uniqueRouteIdentifier" name="uniqueRouteIdentifier"
 						type="hidden" value="${driving1.uniqueRouteIdentifier}" />
-					<button type="submit">Изменить перегон</button>
+					<button type="submit">Изменить переезд</button>
 				</form:form>
 			</div>
 		</c:forEach>

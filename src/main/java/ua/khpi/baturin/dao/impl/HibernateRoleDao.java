@@ -29,7 +29,7 @@ public class HibernateRoleDao implements RoleDao {
         if (role == null) {
             throw new NullPointerException();
         }
-        sessionFactory.getCurrentSession().save(role);
+        sessionFactory.getCurrentSession().saveOrUpdate(role);
     }
 
     @Transactional

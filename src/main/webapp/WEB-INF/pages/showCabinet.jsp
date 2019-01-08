@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 <link href="css/privateCabinet.css" rel="stylesheet">
-<title>Личный кабинет</title>:
+<title>Личный кабинет</title>
 </head>
 <body>
 	<div clss="custum-button">

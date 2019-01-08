@@ -9,12 +9,20 @@
 <title>Carrier</title>
 </head>
 <body>
-	<c:out value="${message}" />
+	<div class="error-message">
+		<c:out value="${message}" />
+	</div>
 	<form:form id="toAdmin" method="get" action="admin" />
 	<button onclick="document.forms['toAdmin'].submit()">На
 		главную</button>
 	<button onclick="document.forms['createForm'].submit()">Добавить
 		перевозчика</button>
+
+	<form action="carrierManagement" method="get">
+		Найти пеервозчика <input placeholder="Название перевозчика" id="title"
+			name="title" type="text"></input> <input type="submit" value="поиск">
+	</form>
+
 	<my:carrierTag carriers="${carriers}" />
 	<p />
 	<form:form id="createForm" method="get" action="createCarrier" />

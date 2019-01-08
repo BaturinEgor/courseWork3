@@ -26,136 +26,149 @@ import ua.khpi.baturin.entity.Station;
 @RequestMapping("/updateRoute")
 public class UpdateRoute {
 
-    public static List<Driving> drivings = new ArrayList<>();
-    private static Bus bus = new Bus();
-    private static String routeNumber;
-    private static Long routeId;
+	public static List<Driving> drivings = new ArrayList<>();
+	private static Bus bus = new Bus();
+	private static String routeNumber;
+	private static Long routeId;
 
-    @Autowired
-    private StationDao stationDao;
+	@Autowired
+	private StationDao stationDao;
 
-    @Autowired
-    private DrivingDao drivingDao;
+	@Autowired
+	private DrivingDao drivingDao;
 
-    @Autowired
-    private BusDao busDao;
+	@Autowired
+	private BusDao busDao;
 
-    @Autowired
-    private RouteDao routeDao;
+	@Autowired
+	private RouteDao routeDao;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView createInit(@ModelAttribute("departureStation") String departureStation,
-            @ModelAttribute("arrivalStation") String arrivalStation, @ModelAttribute("arrivalTime") String arrivalTime,
-            @ModelAttribute("arrivalDate") String arrivalDate, @ModelAttribute("departureTime") String departureTime,
-            @ModelAttribute("departureDate") String departureDate, @ModelAttribute("price") String price,
-            @ModelAttribute("selectedBus") String bus, @ModelAttribute("routeNumber") String routeNumber,
-            @ModelAttribute("id") String id, BindingResult result, Model model) {
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView createInit(@ModelAttribute("departureStation") String departureStation,
+			@ModelAttribute("arrivalStation") String arrivalStation, @ModelAttribute("arrivalTime") String arrivalTime,
+			@ModelAttribute("arrivalDate") String arrivalDate, @ModelAttribute("departureTime") String departureTime,
+			@ModelAttribute("departureDate") String departureDate, @ModelAttribute("price") String price,
+			@ModelAttribute("selectedBus") String bus, @ModelAttribute("routeNumber") String routeNumber,
+			@ModelAttribute("id") String id, BindingResult result, Model model) {
 
-        System.out.println("bus + = " + bus);
+		System.out.println("bus + = " + bus);
 
-        System.out.println("dr some " + drivings);
+		System.out.println("dr some " + drivings);
 
-        List<String> days = new ArrayList<>();
-        days.add("Понедельник");
-        days.add("Вторник");
-        days.add("Среда");
-        days.add("Четверг");
-        days.add("Пятница");
-        days.add("Суббота");
-        days.add("Воскресенье");
+		List<String> days = new ArrayList<>();
+		days.add("Понедельник");
+		days.add("Вторник");
+		days.add("Среда");
+		days.add("Четверг");
+		days.add("Пятница");
+		days.add("Суббота");
+		days.add("Воскресенье");
 
-        System.out.println(id);
-        if (id != null && !id.equals("")) {
-            Long routeToUpdateId = null;
-            try {
-                routeToUpdateId = Long.parseLong(id);
-            } catch (NumberFormatException e) {
-                return new ModelAndView("redirect:/routeManagement", "message", "error while parsing id");
-            }
-            UpdateRoute.routeId = routeToUpdateId;
-            System.out.println("drivings = " + drivingDao.findByRoute(routeDao.findById(routeToUpdateId)));
-            UpdateRoute.drivings = drivingDao.findByRoute(routeDao.findById(routeToUpdateId));
-            UpdateRoute.routeNumber = routeDao.findById(routeToUpdateId).getRouteNumber();
-            UpdateRoute.bus = routeDao.findById(routeToUpdateId).getBus();
-        }
+		System.out.println(id);
+		if (id != null && !id.equals("")) {
+			Long routeToUpdateId = null;
+			try {
+				routeToUpdateId = Long.parseLong(id);
+			} catch (NumberFormatException e) {
+				return new ModelAndView("redirect:/routeManagement", "message",
+						"ошибка при изменении маршрута, неверный id маршрута");
+			}
+			UpdateRoute.routeId = routeToUpdateId;
+			System.out.println("drivings = " + drivingDao.findByRoute(routeDao.findById(routeToUpdateId)));
+			UpdateRoute.drivings = drivingDao.findByRoute(routeDao.findById(routeToUpdateId));
+			UpdateRoute.routeNumber = routeDao.findById(routeToUpdateId).getRouteNumber();
+			UpdateRoute.bus = routeDao.findById(routeToUpdateId).getBus();
+		}
 
-        if (bus != null && !bus.equals("")) {
-            System.out.println("Change bus " + busDao.findByNumber(bus));
-            UpdateRoute.bus = busDao.findByNumber(bus);
-        }
+		if (bus != null && !bus.equals("")) {
+			System.out.println("Change bus " + busDao.findByNumber(bus));
+			UpdateRoute.bus = busDao.findByNumber(bus);
+		}
 
-        ModelAndView modelAndView = new ModelAndView("updateRoute", "", "");
-        modelAndView.addObject("stations", stationDao.findAll());
-        modelAndView.addObject("driving", new Driving());
-        modelAndView.addObject("busses", busDao.findAll());
-        System.out.println("route number = " + UpdateRoute.routeNumber);
-        modelAndView.addObject("routeNumber", UpdateRoute.routeNumber);
-        modelAndView.addObject("bus", UpdateRoute.bus.getBusNumber());
-        modelAndView.addObject("days", days);
+		ModelAndView modelAndView = new ModelAndView("updateRoute", "", "");
+		modelAndView.addObject("stations", stationDao.findAll());
+		modelAndView.addObject("driving", new Driving());
+		modelAndView.addObject("busses", busDao.findAll());
+		System.out.println("route number = " + UpdateRoute.routeNumber);
+		modelAndView.addObject("routeNumber", UpdateRoute.routeNumber);
+		modelAndView.addObject("bus", UpdateRoute.bus.getBusNumber());
+		modelAndView.addObject("days", days);
 
-        for (int i = 0; i < UpdateRoute.drivings.size(); i++) {
-            UpdateRoute.drivings.get(i).setUniqueRouteIdentifier((long) i);
-        }
-        modelAndView.addObject("drivings", UpdateRoute.drivings);
-        System.out.println("drivings = " + UpdateRoute.drivings);
+		for (int i = 0; i < UpdateRoute.drivings.size(); i++) {
+			UpdateRoute.drivings.get(i).setUniqueRouteIdentifier((long) i);
+		}
+		modelAndView.addObject("drivings", UpdateRoute.drivings);
+		System.out.println("drivings = " + UpdateRoute.drivings);
 
-        Driving drivingToAdd = new Driving();
+		Driving drivingToAdd = new Driving();
 
-        try {
-            drivingToAdd.setArrivalDate(arrivalDate);
-            drivingToAdd.setDepartureDate(departureDate);
-            drivingToAdd.setArrivalTime(Time.valueOf(arrivalTime));
-            drivingToAdd.setDepartureTime(Time.valueOf(departureTime));
-            drivingToAdd.setPrice((Double.parseDouble(price)));
-        } catch (IllegalArgumentException e) {
-            System.out.println("parse exception");
-            System.out.println(modelAndView.getModel().get("drivings"));
-            return modelAndView;
-        }
+		if (!arrivalTime.equals("")) {
+			System.out.println("ds " + departureStation);
+			System.out.println("as " + arrivalStation);
+			if (!departureStation.equals("Станция отправления") || !arrivalStation.equals("Станция прибытия")) {
+				try {
+					drivingToAdd.setArrivalDate(arrivalDate);
+					drivingToAdd.setDepartureDate(departureDate);
+					drivingToAdd.setArrivalTime(Time.valueOf(arrivalTime));
+					drivingToAdd.setDepartureTime(Time.valueOf(departureTime));
+					drivingToAdd.setPrice((Double.parseDouble(price)));
+				} catch (IllegalArgumentException e) {
+					System.out.println("parse exception");
+					System.out.println(modelAndView.getModel().get("drivings"));
+					modelAndView.addObject("message", "Введены некорректные данные");
+					return modelAndView;
+				}
+			} else {
+				modelAndView.addObject("message", "Выберите станцию отправления и прибытия");
+				return modelAndView;
+			}
+		} else {
+			return modelAndView;
+		}
 
-        Station arrivalSt = stationDao.findByTitle(arrivalStation);
-        Station departureSt = stationDao.findByTitle(departureStation);
+		Station arrivalSt = stationDao.findByTitle(arrivalStation);
+		Station departureSt = stationDao.findByTitle(departureStation);
 
-        drivingToAdd.setArrivalStation(arrivalSt);
-        drivingToAdd.setDepartureStation(departureSt);
-        drivings.add(drivingToAdd);
+		drivingToAdd.setArrivalStation(arrivalSt);
+		drivingToAdd.setDepartureStation(departureSt);
+		drivings.add(drivingToAdd);
 
-        for (int i = 0; i < UpdateRoute.drivings.size(); i++) {
-            UpdateRoute.drivings.get(i).setUniqueRouteIdentifier((long) i);
-        }
-        modelAndView.addObject("drivings", UpdateRoute.drivings);
+		for (int i = 0; i < UpdateRoute.drivings.size(); i++) {
+			UpdateRoute.drivings.get(i).setUniqueRouteIdentifier((long) i);
+		}
+		modelAndView.addObject("drivings", UpdateRoute.drivings);
 
-        System.out.println("2 " + drivings);
+		System.out.println("2 " + drivings);
 
-        return modelAndView;
-    }
+		return modelAndView;
+	}
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String createInsert(@ModelAttribute("selectedBus") String bus) {
-        System.out.println("bus  " + bus);
-        if (bus != null && !bus.equals("")) {
-            UpdateRoute.bus = busDao.findByNumber(bus);
-        }
-        Route route = new Route();
-        route.setBus(UpdateRoute.bus);
-        System.out.println(UpdateRoute.routeNumber);
-        route.setRouteNumber(UpdateRoute.routeNumber);
+	@RequestMapping(method = RequestMethod.POST)
+	public String createInsert(@ModelAttribute("selectedBus") String bus) {
+		System.out.println("bus  " + bus);
+		if (bus != null && !bus.equals("")) {
+			UpdateRoute.bus = busDao.findByNumber(bus);
+		}
+		Route route = new Route();
+		route.setBus(UpdateRoute.bus);
+		System.out.println(UpdateRoute.routeNumber);
+		route.setRouteNumber(UpdateRoute.routeNumber);
 
-        System.out.println(route);
+		System.out.println(route);
 
-        route.setId(routeId);
+		route.setId(routeId);
 
-        routeDao.update(route);
+		routeDao.update(route);
 
-        for (Driving driving : drivings) {
-            driving.setRoute(route);
-            drivingDao.create(driving);
-        }
+		for (Driving driving : drivings) {
+			driving.setRoute(route);
+			drivingDao.create(driving);
+		}
 
-        System.out.println(">>>>");
-        System.out.println(routeDao.findAll());
-        System.out.println(drivingDao.findAll());
-        return "redirect:/routeManagement";
-    }
+		System.out.println(">>>>");
+		System.out.println(routeDao.findAll());
+		System.out.println(drivingDao.findAll());
+		return "redirect:/routeManagement";
+	}
 
 }

@@ -27,6 +27,6 @@ public class DeleteRoute {
         }
         Route user = carrierDao.findById(idUserToDelete);
         carrierDao.remove(user);
-        return new ModelAndView("redirect:/routeManagement", "message", "Route successfuly deleted");
+        return new ModelAndView("redirect:/routeManagement", "message", "Маршрут успешно удалён");
     }
 }

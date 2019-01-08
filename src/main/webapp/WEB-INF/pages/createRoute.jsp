@@ -5,9 +5,12 @@
 <html lang="en">
 <head>
 <link href="css/createRoute.css" rel="stylesheet">
-<title>Добавить маршрут</title>:
+<title>Добавить маршрут</title>
 </head>
 <body>
+	<div class="error-message">
+		<c:out value="${message}" />
+	</div>
 	<div class="header-container">
 		<h2>Добавть маршрут</h2>
 	</div>
@@ -17,8 +20,8 @@
 	<form:form method="get" action="createRoute" modelAttribute="driving">
 		<div class="triple-container">
 			<div class="route-container">
-				<p>&nbsp;Автобус</p>
-				<select class="custom-select" id="selectedBus" name="selectedBus">
+				&nbsp;Автобус: <select class="custom-select" id="selectedBus"
+					name="selectedBus">
 					<c:forEach items="${busses}" var="bus1">
 						<c:choose>
 							<c:when test="${bus.equals(bus1.busNumber)}">
@@ -29,9 +32,9 @@
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</select>
+				</select> &nbsp;Номер маршрута:
 				<form:input id="routeNumber" path="routeNumber" type="text"
-					placeholder="Номер маршрута" required="required"
+					placeholder="например 192А5" required="required"
 					value="${routeNumber}" />
 				<button type="button"
 					onclick="document.forms['addDrivingForm'].submit()">Добавить
@@ -47,11 +50,13 @@
 				&nbsp; &nbsp; &nbsp;Данные прибытия</p>
 			<select class="custom-select" id="departureStation"
 				name="departureStation">
+				<option selected="true">Станция отправления</option>
 				<c:forEach items="${stations}" var="station">
 					<option value=${station.title}>${station.title}</option>
 				</c:forEach>
 			</select> <select class="custom-select" id="arrivalStation"
 				name="arrivalStation">
+				<option selected="true">Станция прибытия</option>
 				<c:forEach items="${stations}" var="station">
 					<option value=${station.title}>${station.title}</option>
 				</c:forEach>
@@ -65,12 +70,20 @@
 					<option value=${day}>${day}</option>
 				</c:forEach>
 			</select>
-			<form:input path="departureTime" type="text"
-				placeholder="Время отправления" required="required" />
-			<form:errors path="departureTime" cssStyle="color: #f4426e;" />
-			<form:input path="arrivalTime" type="text"
-				placeholder="Время прибытия" required="required" />
-			<form:errors path="arrivalTime" cssStyle="color: #f4426e;" />
+			<div class="time-global-container">
+				<div class="time-container">
+					Время отправления
+					<form:input path="departureTime" type="text"
+						placeholder="например 13:30:00" required="required" />
+					<form:errors path="departureTime" cssStyle="color: #f4426e;" />
+				</div>
+				<div class="time-container">
+					Время прибытия
+					<form:input path="arrivalTime" type="text"
+						placeholder="например 09:30:00" required="required" />
+					<form:errors path="arrivalTime" cssStyle="color: #f4426e;" />
+				</div>
+			</div>
 			<form:input path="price" type="text" placeholder="Цена"
 				required="required" />
 			<form:errors path="price" cssStyle="color: #f4426e;" />
@@ -88,7 +101,7 @@
 					<input id="uniqueRouteIdentifier" name="uniqueRouteIdentifier"
 						type="hidden" value="${driving1.uniqueRouteIdentifier}" />
 					<input id="bus" name="bus" type="hidden" value="${bus}" />
-					<textarea readonly rows="4" cols="26" name="text">${driving1.departureStation.title} -  ${driving1.arrivalStation.title}&#013;&#010;${driving1.departureDate} - ${driving1.arrivalDate}&#013;&#010;${driving1.departureTime} - ${driving1.arrivalTime}&#013;&#010;Цена: ${driving1.price}</textarea>
+					<textarea readonly rows="4" cols="35" name="text">${driving1.departureStation.title} -  ${driving1.arrivalStation.title}&#013;&#010;${driving1.departureDate} - ${driving1.arrivalDate}&#013;&#010;${driving1.departureTime} - ${driving1.arrivalTime}&#013;&#010;Цена: ${driving1.price}</textarea>
 					<div class="custom-button">
 						<button type="submit">Удалить переезд</button>
 					</div>

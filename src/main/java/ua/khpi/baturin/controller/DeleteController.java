@@ -27,6 +27,6 @@ public class DeleteController {
         }
         User user = userService.findById(idUserToDelete);
         userService.remove(user);
-        return new ModelAndView("redirect:/admin", "message", "Пользователь успешно удалён");
+        return new ModelAndView("redirect:/usersManagement", "message", "Пользователь успешно удалён");
     }
 }

@@ -28,6 +28,7 @@ public class HibernateBusDaoImpl implements BusDao {
         if (bus == null) {
             throw new NullPointerException();
         }
+        System.out.println(bus);
         sessionFactory.getCurrentSession().save(bus);
     }
 

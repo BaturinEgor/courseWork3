@@ -29,5 +29,11 @@
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.util.String</type>
 		</attribute>
+		<attribute>
+            <name>date</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.String</type>
+        </attribute>
 	</tag>
 </taglib>

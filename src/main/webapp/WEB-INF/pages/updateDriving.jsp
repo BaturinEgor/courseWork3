@@ -69,7 +69,7 @@
 	<div class="header-container">
 		<button type="button"
 			onclick="document.forms['updateDriving'].submit()">Изменить
-			перегон</button>
+			переезд</button>
 		<button type="button" onclick="document.forms['cancelForm'].submit()">Отмена</button>
 	</div>
 </body>

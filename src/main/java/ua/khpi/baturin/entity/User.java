@@ -18,130 +18,130 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User implements Serializable {
 
-    private static final long serialVersionUID = -2834163621637381970L;
+	private static final long serialVersionUID = -2834163621637381970L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	private Long id;
 
-    @Column(name = "login")
-    private String login;
+	@Column(name = "login")
+	private String login;
 
-    @Column(name = "password")
-    private String password;
+	@Column(name = "password")
+	private String password;
 
-    @Column(name = "firstName")
-    private String firstName;
+	@Column(name = "firstName")
+	private String firstName;
 
-    @Column(name = "lastName")
-    private String lastName;
+	@Column(name = "lastName")
+	private String lastName;
 
-    @ManyToOne()
-    private Role role;
+	@ManyToOne()
+	private Role role;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Ticket> tickets;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Ticket> tickets;
 
-    public User() {
+	public User() {
 
-    }
+	}
 
-    public User(Long id, String login, String password, String email, String firstName, String lastName, Date birthday,
-            Role role) {
-        super();
-        this.id = id;
-        this.login = login;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.role = role;
-    }
+	public User(Long id, String login, String password, String email, String firstName, String lastName, Date birthday,
+			Role role) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.role = role;
+	}
 
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
 
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getLogin() {
-        return login;
-    }
+	public String getLogin() {
+		return login;
+	}
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+	public void setLogin(String login) {
+		this.login = login;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public Role getRole() {
-        return role;
-    }
+	public Role getRole() {
+		return role;
+	}
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        User other = (User) obj;
-        if (id == null) {
-            if (other.id != null) {
-                return false;
-            }
-        } else if (!id.equals(other.id)) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		User other = (User) obj;
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		return true;
+	}
 
 }

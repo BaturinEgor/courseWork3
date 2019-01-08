@@ -10,6 +10,9 @@
 <title>Create user</title>
 </head>
 <body>
+	<div class="error-message">
+		<c:out value="${message}" />
+	</div>
 	<button type="button" onclick="document.forms['logout'].submit()">Выйти</button>
 	<form:form id="logout" method="get" action="logout" />
 	<form:form id="privateCabinet" method="get" action="privateCabinet" />

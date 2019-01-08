@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ua.khpi.baturin.dao.contract.BusDao;
 import ua.khpi.baturin.dao.contract.CarrierDao;
 import ua.khpi.baturin.entity.Bus;
+import ua.khpi.baturin.util.Validator;
 
 @Controller
 @RequestMapping("/updateBus")
@@ -37,10 +38,20 @@ public class UpdateBusController {
             @ModelAttribute("carrier") String carrier) {
         System.out.println(carrier);
         System.out.println(bus);
+        if (bus.getBusNumber() != null) {
+			if (!Validator.busNumberCheck(bus.getBusNumber())) {
+				model.addAttribute("message", "Неверный номер автобуа");
+				return "redirect:/busManagement";
+			}
+			if (bus.getSeats() <= 0) {
+				model.addAttribute("message", "Ошибка при вводе количества мест");
+				return "redirect:/busManagement";
+			}
+		}
         bus.setCarrier(carrierDao.findByTitle(carrier));
         System.out.println(bus);
         busDao.update(bus);
-        model.addAttribute("message", "Bus successfuly updated");
+        model.addAttribute("message", "Автобус успешно изменён");
         return "redirect:/busManagement";
     }
 }

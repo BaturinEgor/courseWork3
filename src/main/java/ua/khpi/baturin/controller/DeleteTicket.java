@@ -25,10 +25,10 @@ public class DeleteTicket {
         try {
             idUserToDelete = Long.parseLong(id);
         } catch (Exception e) {
-            return new ModelAndView("redirect:/privateabinet", "message", "Error while ticket deleting");
+            return new ModelAndView("redirect:/privateabinet", "message", "Ошибка при удалении билета");
         }
         Ticket user = busDao.findById(idUserToDelete);
         busDao.remove(user);
-        return new ModelAndView("redirect:/privateCabinet", "message", "Билет успешно сдан");
+        return new ModelAndView("redirect:/privateCabinet", "message", "Билет успешно удалён");
     }
 }

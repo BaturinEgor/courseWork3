@@ -71,7 +71,7 @@ public class RoutesList implements Tag {
                 for (Driving driving : rout.getDrivings()) {
                     stringBuilder.append(
                             driving.getDepartureStation().getTitle() + " - " + driving.getArrivalStation().getTitle()
-                                    + driving.getDepartureTime() + " - " + driving.getArrivalTime() + "<p/>" + "<p/>");
+                                    + driving.getDepartureTime() + " - " + driving.getArrivalTime() + "<p/>" + "__________________________" + "<p/>");
                 }
                 stringBuilder.append("</td>").append("<td>");
                 stringBuilder.append(rout.getAmountOfSeats());

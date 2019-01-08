@@ -28,87 +28,94 @@ import ua.khpi.baturin.entity.User;
 @SessionAttributes({ "user" })
 public class BookTicket {
 
-    @Autowired
-    RouteDao routeDao;
+	@Autowired
+	RouteDao routeDao;
 
-    @Autowired
-    TicketDao ticketDao;
+	@Autowired
+	TicketDao ticketDao;
 
-    @Autowired
-    DrivingDao drivingDao;
+	@Autowired
+	DrivingDao drivingDao;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView initUpdating(@RequestParam(value = "id") Long id, Model model) {
-        Route route = routeDao.findById(id);
-        List<Integer> seats = new ArrayList<>();
-        for (int i = 1; i <= route.getBus().getSeats(); i++) {
-            seats.add(i);
-        }
-        for (Ticket ticket : ticketDao.findByRoute(route)) {
-            seats.remove(new Integer(ticket.getSeat()));
-        }
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView initUpdating(@RequestParam(value = "id") Long id, @RequestParam(value = "date") String date,
+			Model model) {
+		System.out.println("date = " + date);
+		Route route = routeDao.findById(id);
+		List<Integer> seats = new ArrayList<>();
+	//	List<Integer> seats2 = new ArrayList<>();
+		for (int i = 1; i <= route.getBus().getSeats(); i++) {
+			seats.add(i);
+		}
+		for (Ticket ticket : ticketDao.findByRoute(route)) {
+			if (ticket.getDepartureDate().equals(date)) {
+			//	seats2.add(ticket.getSeat());
+				 seats.remove(new Integer(ticket.getSeat()));
+			}
+		}
 
-        System.out.println(seats);
+		System.out.println(seats);
 
-        ModelAndView mav = new ModelAndView("bookTicket", "seats", seats);
-        mav.addObject("routeNumber", route.getRouteNumber());
-        mav.addObject("routeId", id);
-        return mav;
-    }
+		ModelAndView mav = new ModelAndView("bookTicket", "seats", seats);
+		//mav.addObject("seats2", seats2);
+		mav.addObject("routeNumber", route.getRouteNumber());
+		mav.addObject("routeId", id);
+		return mav;
+	}
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView updateProcess(@SessionAttribute("user") User user, @ModelAttribute("routeId") String routeId,
-            @ModelAttribute("seat") String seat, BindingResult result, Model model) {
-        Route route = routeDao.findById(Long.parseLong(routeId));
-        List<Driving> drivings = drivingDao.findByRoute(route);
-        Ticket ticket = new Ticket();
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView updateProcess(@SessionAttribute("user") User user, @ModelAttribute("routeId") String routeId,
+			@ModelAttribute("seat") String seat, BindingResult result, Model model) {
+		Route route = routeDao.findById(Long.parseLong(routeId));
+		List<Driving> drivings = drivingDao.findByRoute(route);
+		Ticket ticket = new Ticket();
 
-        for (Driving driving : drivings) {
-            if (driving.getArrivalStation().equals(FindTicketController.arrivalStation)) {
-                ticket.setArrivalDate(FindTicketController.arrivalDate);
-                ticket.setArrivalTime(driving.getArrivalTime());
-                ticket.setArrivalStation(driving.getArrivalStation());
-            }
-            if (driving.getDepartureStation().equals(FindTicketController.departureStation)) {
-                ticket.setDepartureDate(FindTicketController.departureDate);
-                ticket.setDepartureTime(driving.getDepartureTime());
-                ticket.setDepartureStation(driving.getDepartureStation());
-            }
-        }
+		for (Driving driving : drivings) {
+			if (driving.getArrivalStation().equals(FindTicketController.arrivalStation)) {
+				ticket.setArrivalDate(FindTicketController.arrivalDate);
+				ticket.setArrivalTime(driving.getArrivalTime());
+				ticket.setArrivalStation(driving.getArrivalStation());
+			}
+			if (driving.getDepartureStation().equals(FindTicketController.departureStation)) {
+				ticket.setDepartureDate(FindTicketController.departureDate);
+				ticket.setDepartureTime(driving.getDepartureTime());
+				ticket.setDepartureStation(driving.getDepartureStation());
+			}
+		}
 
-        Double price = 0.0;
+		Double price = 0.0;
 
-        boolean start = false;
-        boolean finish = false;
-        for (Driving driving : drivingDao.findByRoute(route)) {
-            if (driving.getDepartureStation().equals(FindTicketController.departureStation)) {
-                start = true;
-            }
-            System.out.println(driving);
-            System.out.println("start " + start);
-            System.out.println("finish " + finish);
-            if (start == true && finish == false) {
-                System.out.println("add price");
-                price += driving.getPrice();
-            }
-            if (driving.getArrivalStation().equals(FindTicketController.arrivalStation)) {
-                finish = true;
-            }
-        }
+		boolean start = false;
+		boolean finish = false;
+		for (Driving driving : drivingDao.findByRoute(route)) {
+			if (driving.getDepartureStation().equals(FindTicketController.departureStation)) {
+				start = true;
+			}
+			System.out.println(driving);
+			System.out.println("start " + start);
+			System.out.println("finish " + finish);
+			if (start == true && finish == false) {
+				System.out.println("add price");
+				price += driving.getPrice();
+			}
+			if (driving.getArrivalStation().equals(FindTicketController.arrivalStation)) {
+				finish = true;
+			}
+		}
 
-        ticket.setPrice(price);
+		ticket.setPrice(price);
 
-        ticket.setRoute(route);
-        ticket.setSeat(Integer.parseInt(seat));
-        ticket.setUser(user);
+		ticket.setRoute(route);
+		ticket.setSeat(Integer.parseInt(seat));
+		ticket.setUser(user);
 
-        System.out.println(ticket);
+		System.out.println("booked ticket = " + ticket);
 
-        ticketDao.create(ticket);
+		ticketDao.create(ticket);
 
-        System.out.println("route id " + routeId);
-        System.out.println("seat " + seat);
+		System.out.println("route id " + routeId);
+		System.out.println("seat " + seat);
 
-        return new ModelAndView("showTicket", "ticket", ticket);
-    }
+		return new ModelAndView("showTicket", "ticket", ticket);
+	}
 }

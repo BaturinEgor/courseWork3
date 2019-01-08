@@ -38,7 +38,7 @@ public class UpdateCarrierController {
         }
         System.out.println(carrier);
         carrierDao.update(carrier);
-        model.addAttribute("message", "Carrier successfuly updated");
+        model.addAttribute("message", "Перевозчик успешно изменён");
         return "redirect:/carrierManagement";
     }
 }
