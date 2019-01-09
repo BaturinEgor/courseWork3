@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +19,7 @@
 		<h2>Выберите место</h2>
 		<div class="cantainer-flex">
 			<c:forEach items="${seats}" var="seat">
-			 <%-- <c:if test="${fn:contains(seats2, 'seat')}}"> --%>
+				<%-- <c:if test="${fn:contains(seats2, 'seat')}}"> --%>
 				<c:if test="${count % 4 == 0}">
 					<c:if test="${flag == 'true'}">
 						<c:set var="flag" value="false" scope="page" />
@@ -34,7 +35,13 @@
 		<form:form id="addDrivingForm" method="post" action="bookTicket">
 			<input id="routeId" name="routeId" type="hidden" value="${routeId}" />
 			<input id="seat" name="seat" type="hidden" value="${seat}" />
-			<button tye="submit">${seat}</button>
+			 <c:set var="contains2" value="~${seat}~" />
+			<c:if test='${fn:contains(seats2, contains2)}'>
+				<button class="button2" disabled="true" tye="submit">${seat}</button>
+			</c:if>
+			<c:if test='${!fn:contains(seats2, contains2)}'>
+				<button tye="submit">${seat}</button>
+			</c:if>
 		</form:form>
 		<c:set var="count" value="${count + 1}" scope="page" />
 		</c:forEach>

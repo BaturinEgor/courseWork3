@@ -105,16 +105,26 @@ public class UpdateRoute {
 		if (!arrivalTime.equals("")) {
 			System.out.println("ds " + departureStation);
 			System.out.println("as " + arrivalStation);
-			if (!departureStation.equals("Станция отправления") || !arrivalStation.equals("Станция прибытия")) {
+			if (!departureStation.equalsIgnoreCase("Станция отправления")
+					&& !arrivalStation.equalsIgnoreCase("Станция прибытия")) {
 				try {
+					System.out.println(arrivalDate);
 					drivingToAdd.setArrivalDate(arrivalDate);
+					System.out.println(departureDate);
 					drivingToAdd.setDepartureDate(departureDate);
+					System.out.println(arrivalTime);
 					drivingToAdd.setArrivalTime(Time.valueOf(arrivalTime));
+					System.out.println(departureTime);
 					drivingToAdd.setDepartureTime(Time.valueOf(departureTime));
-					drivingToAdd.setPrice((Double.parseDouble(price)));
+					System.out.println(price);
+					Double pc = Double.parseDouble(price);
+					if (pc <= 0) {
+						modelAndView.addObject("message", "Введена некорректная цена");
+						return modelAndView;
+					}
+					drivingToAdd.setPrice(pc);
 				} catch (IllegalArgumentException e) {
 					System.out.println("parse exception");
-					System.out.println(modelAndView.getModel().get("drivings"));
 					modelAndView.addObject("message", "Введены некорректные данные");
 					return modelAndView;
 				}
@@ -144,8 +154,10 @@ public class UpdateRoute {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String createInsert(@ModelAttribute("selectedBus") String bus) {
+	public String createInsert(@ModelAttribute("selectedBus") String bus,
+			@ModelAttribute("routeNumber") String number) {
 		System.out.println("bus  " + bus);
+		System.out.println("number = " + number);
 		if (bus != null && !bus.equals("")) {
 			UpdateRoute.bus = busDao.findByNumber(bus);
 		}
@@ -157,6 +169,7 @@ public class UpdateRoute {
 		System.out.println(route);
 
 		route.setId(routeId);
+		route.setRouteNumber(number);
 
 		routeDao.update(route);
 

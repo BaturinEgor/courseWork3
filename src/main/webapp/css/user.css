@@ -1,54 +1,60 @@
 body {
- padding-top: 40px;
- padding-bottom: 40px;
- background-color: #eee;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #eee;
 }
 
 input[type=text], input[type=password] {
- width: 200px;
- padding: 12px 20px;
- margin: 8px 0;
- display: inline-block;
- border: 1px solid #ccc;
- box-sizing: border-box;
+	width: 200px;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
 }
 
 button {
- background-color: #4CAF50;
- color: white;
- padding: 12px 20px;
- margin: 8px 0;
- border: none;
- cursor: pointer;
- width: 200px;
+	background-color: #4CAF50;
+	color: white;
+	padding: 12px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 200px;
 }
 
 .container {
- margin-left: auto;
- margin-right: auto;
- width: 200px;
- padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 200px;
+	padding: 10px;
 }
 
 .container2 {
- margin-left: auto;
- margin-right: auto;
- width: 450px;
- padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 605px;
 }
 
 .container-block {
- margin-left: auto;
- margin-right: auto;
- width: 2000px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 2000px;
 }
 
 .custom-select {
- position: relative;
- width: 49%;
- height: 40px
+	position: relative;
+	width: 49%;
+	height: 40px
 }
 
 .error-message {
- color: #f4426e;
+	color: #f4426e;
+}
+
+.container3 {
+	width: 300px;
+	display: inline-table;
+	margin-left: auto;
+    margin-right: auto;
 }

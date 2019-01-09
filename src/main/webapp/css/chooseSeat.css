@@ -16,13 +16,23 @@ button {
 }
 
 .button {
-    background-color: #4CAF50;
+	background-color: #4CAF50;
+	color: white;
+	margin: 5px 5px;
+	border: none;
+	cursor: pointer;
+	text-align: left;
+	width: 100px;
+	height: 44px;
+}
+
+.button2 {
+    background-color: #f4426e;
     color: white;
     margin: 5px 5px;
     border: none;
     cursor: pointer;
     text-align: left;
-    width: 100px;
     height: 44px;
 }
 
@@ -44,18 +54,24 @@ input {
 }
 
 .cantainer-flex {
-	display:flex;
+	display: flex;
 }
 
 .elem {
-	display  : flex;
+	display: flex;
 	flex-direction: column;
-	flex-wrap : wrap;
+	flex-wrap: wrap;
 	width: 100px
 }
 
-
-#addDrivingForm:nth-child(2){
-	margin-bottom:15px;
+.elem2 {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	width: 100px;
+	background-color: #f4426e;
 }
 
+#addDrivingForm:nth-child(2) {
+	margin-bottom: 15px;
+}

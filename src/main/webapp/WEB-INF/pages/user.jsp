@@ -20,17 +20,22 @@
 		modelAttribute="driving">
 		<div class="container2">
 			<h2>Добро пожаловать, ${user.getFirstName()}</h2>
-			<select class="custom-select" id="departureStation"
-				name="departureStation">
-				<c:forEach items="${stations}" var="station">
-					<option value=${station.title}>${station.title}</option>
-				</c:forEach>
-			</select> <select class="custom-select" id="arrivalStation"
-				name="arrivalStation">
-				<c:forEach items="${stations}" var="station">
-					<option value=${station.title}>${station.title}</option>
-				</c:forEach>
-			</select>
+			<div class="container3">
+				Станция отправления <select class="custom-select"
+					id="departureStation" name="departureStation">
+					<c:forEach items="${stations}" var="station">
+						<option value=${station.title}>${station.title}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="container3">
+				Станция прибытия <select class="custom-select" id="arrivalStation"
+					name="arrivalStation">
+					<c:forEach items="${stations}" var="station">
+						<option value=${station.title}>${station.title}</option>
+					</c:forEach>
+				</select>
+			</div>
 		</div>
 		<div class="container">
 			<div class="container-block">

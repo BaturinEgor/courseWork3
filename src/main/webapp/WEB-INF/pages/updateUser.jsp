@@ -46,8 +46,8 @@
 					</c:choose>
 				</c:forEach>
 			</select>
-			<button type="submit">Confirm</button>
-			<button type="button" onclick="document.forms['cancelForm'].submit()">Cancel</button>
+			<button type="submit">изменить</button>
+			<button type="button" onclick="document.forms['cancelForm'].submit()">отмена</button>
 		</form:form>
 	</div>
 </body>

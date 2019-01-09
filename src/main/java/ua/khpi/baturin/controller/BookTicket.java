@@ -43,21 +43,21 @@ public class BookTicket {
 		System.out.println("date = " + date);
 		Route route = routeDao.findById(id);
 		List<Integer> seats = new ArrayList<>();
-	//	List<Integer> seats2 = new ArrayList<>();
+		List<String> seats2 = new ArrayList<>();
 		for (int i = 1; i <= route.getBus().getSeats(); i++) {
 			seats.add(i);
 		}
 		for (Ticket ticket : ticketDao.findByRoute(route)) {
 			if (ticket.getDepartureDate().equals(date)) {
-			//	seats2.add(ticket.getSeat());
-				 seats.remove(new Integer(ticket.getSeat()));
+				seats2.add("~" + ticket.getSeat() + "~");
+				// seats.remove(new Integer(ticket.getSeat()));
 			}
 		}
 
 		System.out.println(seats);
 
 		ModelAndView mav = new ModelAndView("bookTicket", "seats", seats);
-		//mav.addObject("seats2", seats2);
+		mav.addObject("seats2", seats2);
 		mav.addObject("routeNumber", route.getRouteNumber());
 		mav.addObject("routeId", id);
 		return mav;

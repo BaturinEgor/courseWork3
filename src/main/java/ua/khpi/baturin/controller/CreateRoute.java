@@ -80,7 +80,8 @@ public class CreateRoute {
 		if (!arrivalTime.equals("")) {
 			System.out.println("ds " + departureStation);
 			System.out.println("as " + arrivalStation);
-			if (!departureStation.equals("Станция отправления") || !arrivalStation.equals("Станция прибытия")) {
+			if (!departureStation.equalsIgnoreCase("Станция отправления")
+					&& !arrivalStation.equalsIgnoreCase("Станция прибытия")) {
 				try {
 					System.out.println(arrivalDate);
 					drivingToAdd.setArrivalDate(arrivalDate);
@@ -91,7 +92,12 @@ public class CreateRoute {
 					System.out.println(departureTime);
 					drivingToAdd.setDepartureTime(Time.valueOf(departureTime));
 					System.out.println(price);
-					drivingToAdd.setPrice(Double.parseDouble(price));
+					Double pc = Double.parseDouble(price);
+					if(pc <= 0) {
+						modelAndView.addObject("message", "Введена некорректная цена");
+						return modelAndView;
+					}
+					drivingToAdd.setPrice(pc);
 				} catch (IllegalArgumentException e) {
 					System.out.println("parse exception");
 					modelAndView.addObject("message", "Введены некорректные данные");
@@ -126,7 +132,9 @@ public class CreateRoute {
 		route.setRouteNumber(CreateRoute.routeNumber);
 
 		System.out.println(route);
-
+		if (route.getRouteNumber().equals("")) {
+			return "redirect:/routeManagement";
+		}
 		routeDao.create(route);
 
 		for (Driving driving : drivings) {
